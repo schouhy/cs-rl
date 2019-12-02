@@ -18,7 +18,7 @@ Runner::~Runner()
 // Initializers
 void Runner::initWindow()
 {
-    m_Window =  new sf::RenderWindow(sf::VideoMode(640, 480), "SFML Application");
+    m_Window =  new sf::RenderWindow(sf::VideoMode(640, 480), "Las tinieblas de sasa");
     m_Window->setFramerateLimit(90);
     m_Window->setVerticalSyncEnabled(true);
 
@@ -27,6 +27,7 @@ void Runner::initWindow()
 void Runner::initEnvironment()
 {
     m_Environment = new Environment();
+    m_Visualization = new Visualization(m_Environment);
 }
 
 
@@ -49,7 +50,13 @@ void Runner::updateLogic()
 void Runner::render() 
 {
     m_Window->clear();
+
+    // Render
+    m_Visualization->render(m_Window);
+
+
     m_Window->display();
+
 }
 
 void Runner::run()

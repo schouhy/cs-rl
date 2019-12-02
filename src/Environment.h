@@ -10,10 +10,13 @@ private:
     Entity *m_Entity;
     
 public:
+    //Constructor / Destructor
     Environment();
     ~Environment();
 
-    //Functions
+    // Accesors
+    const Entity * const getEntity() const;
+    // Functions
     void step();
     bool isDone() const;
 };

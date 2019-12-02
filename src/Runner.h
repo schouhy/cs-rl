@@ -1,8 +1,7 @@
 #ifndef RUNNER_H
 #define RUNNER_H
 
-#include "Environment.h"
-#include "SFML/Graphics.hpp"
+#include "Visualization.h"
 
 #define TIME_PER_FRAME 1.f/60.f
 
@@ -24,8 +23,10 @@ private:
     void initEnvironment();
 
     //Variables
-    sf::RenderWindow *m_Window;
     Environment *m_Environment;
+
+    sf::RenderWindow *m_Window;    
+    Visualization *m_Visualization;
     sf::Event m_Event;
     sf::Time m_TimeSinceLastUpdate;
 };

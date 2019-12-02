@@ -1,6 +1,6 @@
 #include "Environment.h"
 
-
+// Constructor / Destructor
 Environment::Environment() 
 {
     m_Done = false;
@@ -12,9 +12,18 @@ Environment::~Environment()
     delete m_Entity;
 }
 
+// Accesors
+
+const Entity * const Environment::getEntity() const 
+{
+    return m_Entity;
+}
+
+// Functions
+
 void Environment::step()
 {
-    std::cout << m_Entity->getWidth() << std::endl;
+  //  std::cout << m_Entity->getWidth() << std::endl;
 }
 
 bool Environment::isDone() const
