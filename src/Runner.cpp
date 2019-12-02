@@ -1,6 +1,4 @@
 #include "Runner.h"
-#include <iostream>
-#include <chrono>
 
 
 // Constructor / Destructor
