@@ -6,7 +6,7 @@
 class Visualization
 {
 private:
-    const Environment *m_Environment;
+    Environment *m_Environment;
     sf::RectangleShape m_EntityShape;
     
 public:
@@ -15,7 +15,6 @@ public:
     ~Visualization();
 
     // Functions
-    void update();
     void render(sf::RenderTarget *target);
 };
 

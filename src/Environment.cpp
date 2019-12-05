@@ -4,7 +4,7 @@
 Environment::Environment() 
 {
     m_Done = false;
-    m_Entity = new Entity();
+    m_Entity = new Entity(50.f, 50.f);
 }
 
 Environment::~Environment()

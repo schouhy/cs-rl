@@ -8,29 +8,21 @@
 
 class Entity
 {
+private:
+    float m_X, m_Y;
+    float m_Width, m_Height;
 public:
     // Constructor / Destructor
-    Entity();
+    Entity(float x, float y);
     virtual ~Entity();
 
     // Accesors
-    const std::pair<float, float> getCenter() const;
+    const std::pair<float, float> getPosition() const;
     const float getWidth() const;
     const float getHeight() const;
 
     // Functions
-    void setPosition(float tl_x, float tl_y, float br_x, float br_y);
-
-private:
-    struct BoundingBox
-    {
-        float top_left_x;
-        float top_left_y;
-        float bottom_right_x;
-        float bottom_right_y;
-    };
-
-    BoundingBox m_BoundingBox;
+    void setPosition(float x, float y);
 };
 
 #endif

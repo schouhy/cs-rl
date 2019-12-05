@@ -3,9 +3,11 @@
 
 // Constructor / Destructor
 
-Entity::Entity()
+Entity::Entity(float x, float y)
 {
-    setPosition(50.f, 50.f, 60.f, 60.f);
+    setPosition(50.f, 50.f);
+    m_Height = 10.f;
+    m_Width = 10.f;
 }
 
 Entity::~Entity()
@@ -14,29 +16,24 @@ Entity::~Entity()
 
 // Accesors
 
-const std::pair<float, float> Entity::getCenter() const
+const std::pair<float, float> Entity::getPosition() const
 {
-    float center_x = (m_BoundingBox.top_left_x + m_BoundingBox.bottom_right_x)/2.f;
-    float center_y = (m_BoundingBox.top_left_y + m_BoundingBox.bottom_right_y)/2.f;
-    std::pair<float, float> center(center_x, center_y);
-    return center;
+    return {m_X, m_Y};
 }
 
 const float Entity::getHeight() const
 {
-    return m_BoundingBox.bottom_right_y - m_BoundingBox.top_left_y;
+    return m_Height;
 }
 
 const float Entity::getWidth() const
 {
-    return m_BoundingBox.bottom_right_x - m_BoundingBox.top_left_x;
+    return m_Width;
 }
 // Functions
 
-void Entity::setPosition(float tl_x, float tl_y, float br_x, float br_y)
+void Entity::setPosition(float x, float y)
 {
-    m_BoundingBox.top_left_x = tl_x;
-    m_BoundingBox.top_left_y = tl_y;
-    m_BoundingBox.bottom_right_x = br_x;
-    m_BoundingBox.bottom_right_y = br_y;
+    m_X = x;
+    m_Y = y;
 }
