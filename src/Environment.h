@@ -1,13 +1,13 @@
 #ifndef ENVIRONMENT_H
 #define ENVIRONMENT_H
 
-#include "Entity.h"
+#include "Player.h"
 
 class Environment
 {
 private:
     bool m_Done;
-    Entity *m_Entity;
+    Player *m_Player;
     
 public:
     //Constructor / Destructor
@@ -15,7 +15,7 @@ public:
     ~Environment();
 
     // Accesors
-    const Entity * const getEntity() const;
+    const Player * const getPlayer() const;
     // Functions
     void step();
     bool isDone() const;

@@ -4,10 +4,10 @@
 Visualization::Visualization(Environment *env)
 {
     m_Environment = env;
-    const Entity *entity = m_Environment->getEntity();
+    const Player *player = m_Environment->getPlayer();
 
-    m_EntityShape.setPosition(entity->getPosition().first, entity->getPosition().second);
-    m_EntityShape.setSize(sf::Vector2f(entity->getHeight(), entity->getWidth()));
+    m_EntityShape.setPosition(player->getPosition().first, player->getPosition().second);
+    m_EntityShape.setSize(sf::Vector2f(player->getHeight(), player->getWidth()));
     m_EntityShape.setFillColor(sf::Color::Green);
 }
 

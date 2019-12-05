@@ -4,19 +4,19 @@
 Environment::Environment() 
 {
     m_Done = false;
-    m_Entity = new Entity(50.f, 50.f);
+    m_Player = new Player(50.f, 50.f);
 }
 
 Environment::~Environment()
 {
-    delete m_Entity;
+    delete m_Player;
 }
 
 // Accesors
 
-const Entity * const Environment::getEntity() const 
+const Player * const Environment::getPlayer() const 
 {
-    return m_Entity;
+    return m_Player;
 }
 
 // Functions
