@@ -16,7 +16,7 @@ public:
     ~Player();
 
     // Functions
- //   void performAction(Action action);
+    void performAction(Action action);
 };
 
 #endif // PLAYER_H

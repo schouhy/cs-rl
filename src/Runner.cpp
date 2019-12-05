@@ -20,8 +20,7 @@ void Runner::initWindow()
 {
     m_Window =  new sf::RenderWindow(sf::VideoMode(640, 480), "Las tinieblas de sasa");
     m_Window->setFramerateLimit(90);
-    m_Window->setVerticalSyncEnabled(true);
-
+    m_Window->setVerticalSyncEnabled(true); 
 }
 
 void Runner::initEnvironment()
@@ -32,19 +31,29 @@ void Runner::initEnvironment()
 
 
 // Functions
-void Runner::processSFMLEvents()
+Action Runner::processSFMLEvents()
 {
+    Action action = None;
     while (m_Window->pollEvent(m_Event))
         {
             if (m_Event.type == sf::Event::Closed)
-            m_Window->close();
+                m_Window->close();
         }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+        action = Left;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+        action = Right;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+        action = Down;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+        action = Up;
+    return action;
 }
 
 void Runner::updateLogic()
 {
-    processSFMLEvents();
-    m_Environment->step();
+    Action action = processSFMLEvents();
+    m_Environment->step(action);
 }
 
 void Runner::render() 
@@ -52,6 +61,7 @@ void Runner::render()
     m_Window->clear();
 
     // Render
+    m_Visualization->update();
     m_Visualization->render(m_Window);
 
 

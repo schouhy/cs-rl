@@ -21,9 +21,9 @@ const Player * const Environment::getPlayer() const
 
 // Functions
 
-void Environment::step()
+void Environment::step(Action action)
 {
-  //  std::cout << m_Entity->getWidth() << std::endl;
+    m_Player->performAction(action);
 }
 
 bool Environment::isDone() const

@@ -8,7 +8,7 @@
 
 class Entity
 {
-private:
+protected:
     float m_X, m_Y;
     float m_Width, m_Height;
 public:

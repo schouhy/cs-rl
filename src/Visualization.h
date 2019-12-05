@@ -15,6 +15,7 @@ public:
     ~Visualization();
 
     // Functions
+    void update();
     void render(sf::RenderTarget *target);
 };
 
