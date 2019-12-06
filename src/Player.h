@@ -29,7 +29,7 @@ public:
 
 
     // Functions
-    void performAction(int& action);
+    void performAction(int& pos_action, float& angle_action);
 };
 
 #endif // PLAYER_H

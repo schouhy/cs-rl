@@ -21,9 +21,9 @@ const Player * const Environment::getPlayer() const
 
 // Functions
 
-void Environment::step(int action)
+void Environment::step(int& pos_action, float& angle_action)
 {
-    m_Player->performAction(action);
+    m_Player->performAction(pos_action, angle_action);
 }
 
 bool Environment::isDone() const

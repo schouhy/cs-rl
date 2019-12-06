@@ -12,7 +12,7 @@ public:
     ~Runner();
 
     //Functions
-    int processSFMLEvents();
+    void processSFMLEvents(int& pos_action, float& angle_action);
     void updateLogic();
     void render();
     void run();

@@ -17,7 +17,7 @@ public:
     // Accesors
     const Player * const getPlayer() const;
     // Functions
-    void step(int action);
+    void step(int& pos_action, float& angle_action);
     bool isDone() const;
 };
 

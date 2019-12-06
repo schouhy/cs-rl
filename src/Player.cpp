@@ -23,20 +23,21 @@ const glm::vec2 Player::getDirection() const
 
 // Functions
 
-void Player::performAction(int& action)
+void Player::performAction(int& pos_action, float& angle_action)
 {
-    if (action & StrafLeft) 
+    if (pos_action & StrafLeft) 
     {
         m_Position.x += m_Direction.y * 0.7f;
         m_Position.y += -m_Direction.x * 0.7f;
     }
-    if (action & StrafRight)
+    if (pos_action & StrafRight)
     {
         m_Position.x += -m_Direction.y * 0.7f;
         m_Position.y += m_Direction.x * 0.7f;
     }
-    if (action & Forward)
+    if (pos_action & Forward)
         m_Position += m_Direction;
-    if (action & Backward)
+    if (pos_action & Backward)
         m_Position -= m_Direction * 0.5f;
+    m_Direction = glm::rotate(m_Direction, angle_action);
 }

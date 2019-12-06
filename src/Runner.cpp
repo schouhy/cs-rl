@@ -6,6 +6,7 @@ Runner::Runner()
 {
     initWindow();
     initEnvironment();
+    sf::Mouse::setPosition(sf::Vector2i(200, 200));
 }
 
 Runner::~Runner() 
@@ -20,7 +21,8 @@ void Runner::initWindow()
 {
     m_Window =  new sf::RenderWindow(sf::VideoMode(640, 480), "Las tinieblas de sasa");
     m_Window->setFramerateLimit(90);
-    m_Window->setVerticalSyncEnabled(true); 
+    m_Window->setVerticalSyncEnabled(true);
+    m_Window->setMouseCursorVisible(false);
 }
 
 void Runner::initEnvironment()
@@ -31,29 +33,32 @@ void Runner::initEnvironment()
 
 
 // Functions
-int Runner::processSFMLEvents()
+void Runner::processSFMLEvents(int& pos_action, float& angle_action)
 {
-    int action = 0;
     while (m_Window->pollEvent(m_Event))
         {
             if (m_Event.type == sf::Event::Closed)
                 m_Window->close();
         }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
-        action |= StrafLeft;
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
-        action |=  StrafRight;
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-        action |=  Backward;
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
-        action |=  Forward;
-    return action;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+        pos_action |= StrafLeft;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+        pos_action |=  StrafRight;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+        pos_action |=  Backward;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+        pos_action |=  Forward;
+    angle_action = (sf::Mouse::getPosition().x - 200)/500.f;
+    //m_CurrentMouse_x = new_CurrentMouse_x;
+    sf::Mouse::setPosition(sf::Vector2i(200, 200));
 }
 
 void Runner::updateLogic()
 {
-    int action = processSFMLEvents();
-    m_Environment->step(action);
+    int pos_action = 0;
+    float angle_action;
+    processSFMLEvents(pos_action, angle_action);
+    m_Environment->step(pos_action, angle_action);
 }
 
 void Runner::render() 
