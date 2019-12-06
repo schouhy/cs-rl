@@ -1,12 +1,13 @@
 #include "Runner.h"
 
+#define MOUSEPOSITION 200
 
 // Constructor / Destructor
 Runner::Runner()
 {
     initWindow();
     initEnvironment();
-    sf::Mouse::setPosition(sf::Vector2i(200, 200));
+    sf::Mouse::setPosition(sf::Vector2i(MOUSEPOSITION, MOUSEPOSITION));
 }
 
 Runner::~Runner() 
@@ -41,18 +42,18 @@ void Runner::processSFMLEvents(int& pos_action, float& angle_action)
                 m_Window->close();
         }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-        pos_action |= StrafLeft;
+        pos_action |= StrafeLeft;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-        pos_action |=  StrafRight;
+        pos_action |=  StrafeRight;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
         pos_action |=  Backward;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
         pos_action |=  Forward;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
         pos_action |= Walk;
-    angle_action = (sf::Mouse::getPosition().x - 200)/500.f;
+    angle_action = (sf::Mouse::getPosition().x - MOUSEPOSITION)/500.f;
     //m_CurrentMouse_x = new_CurrentMouse_x;
-    sf::Mouse::setPosition(sf::Vector2i(200, 200));
+    sf::Mouse::setPosition(sf::Vector2i(MOUSEPOSITION, MOUSEPOSITION));
 }
 
 void Runner::updateLogic()

@@ -7,9 +7,9 @@
 
 enum Action
 {
-    None  = 0, 
-    StrafLeft  = BIT(0), 
-    StrafRight = BIT(1), 
+    Idle  = 0, 
+    StrafeLeft  = BIT(0), 
+    StrafeRight = BIT(1), 
     Forward    = BIT(2), 
     Backward   = BIT(3),
     Walk       = BIT(4)
@@ -20,6 +20,7 @@ class Player : public Entity
 {
 private:
     glm::vec2 m_Direction;
+    int m_MovementState;
 public:
     // Constructor / Destructor
     Player(float x, float y);
@@ -27,7 +28,7 @@ public:
 
     // Accessors
     const glm::vec2 getDirection() const;
-
+    const int getMovementState() const;
 
     // Functions
     void performAction(int& pos_action, float& angle_action);
