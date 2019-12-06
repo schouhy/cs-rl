@@ -21,7 +21,7 @@ const Player * const Environment::getPlayer() const
 
 // Functions
 
-void Environment::step(Action action)
+void Environment::step(int action)
 {
     m_Player->performAction(action);
 }

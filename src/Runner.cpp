@@ -31,28 +31,28 @@ void Runner::initEnvironment()
 
 
 // Functions
-Action Runner::processSFMLEvents()
+int Runner::processSFMLEvents()
 {
-    Action action = None;
+    int action = 0;
     while (m_Window->pollEvent(m_Event))
         {
             if (m_Event.type == sf::Event::Closed)
                 m_Window->close();
         }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
-        action = Left;
+        action |= Left;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
-        action = Right;
+        action |=  Right;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-        action = Down;
+        action |=  Down;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
-        action = Up;
+        action |=  Up;
     return action;
 }
 
 void Runner::updateLogic()
 {
-    Action action = processSFMLEvents();
+    int action = processSFMLEvents();
     m_Environment->step(action);
 }
 

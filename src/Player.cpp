@@ -12,22 +12,10 @@ Player::~Player()
 
 // Functions
 
-void Player::performAction(Action action)
+void Player::performAction(int action)
 {
-    switch(action)
-    {
-        case Left:
-            m_X -= 5.f;
-            break;
-        case Right:
-            m_X += 5.f;
-            break;
-        case Up:
-            m_Y -= 5.f;
-            break;
-        case Down:
-            m_Y += 5.f;
-            break;
-    }
-
+    if (action & Left) m_X -= 2.f;
+    if (action & Right) m_X += 2.f;
+    if (action & Up) m_Y -= 2.f;
+    if (action & Down) m_Y += 2.f;
 }

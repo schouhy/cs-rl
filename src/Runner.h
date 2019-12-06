@@ -12,7 +12,7 @@ public:
     ~Runner();
 
     //Functions
-    Action processSFMLEvents();
+    int processSFMLEvents();
     void updateLogic();
     void render();
     void run();
