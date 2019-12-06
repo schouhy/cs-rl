@@ -48,6 +48,8 @@ void Runner::processSFMLEvents(int& pos_action, float& angle_action)
         pos_action |=  Backward;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
         pos_action |=  Forward;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+        pos_action |= Walk;
     angle_action = (sf::Mouse::getPosition().x - 200)/500.f;
     //m_CurrentMouse_x = new_CurrentMouse_x;
     sf::Mouse::setPosition(sf::Vector2i(200, 200));

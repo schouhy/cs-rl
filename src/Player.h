@@ -11,7 +11,8 @@ enum Action
     StrafLeft  = BIT(0), 
     StrafRight = BIT(1), 
     Forward    = BIT(2), 
-    Backward  = BIT(3)
+    Backward   = BIT(3),
+    Walk       = BIT(4)
 };
 
 

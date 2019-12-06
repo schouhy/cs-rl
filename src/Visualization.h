@@ -7,7 +7,11 @@ class Visualization
 {
 private:
     Environment *m_Environment;
+    
+    // Player 
     sf::CircleShape m_EntityShape;
+    sf::Texture m_Texture;
+    sf::IntRect m_Rect;
     
 public:
     // Constructor / Destructor
