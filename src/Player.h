@@ -8,21 +8,24 @@
 enum Action
 {
     None  = 0, 
-    Left  = BIT(0), 
-    Right = BIT(1), 
-    Up    = BIT(2), 
-    Down  = BIT(3)
+    StrafLeft  = BIT(0), 
+    StrafRight = BIT(1), 
+    Forward    = BIT(2), 
+    Backward  = BIT(3)
 };
+
 
 class Player : public Entity
 {
+private:
+    glm::vec2 m_Direction;
 public:
     // Constructor / Destructor
     Player(float x, float y);
     ~Player();
 
     // Functions
-    void performAction(int action);
+    void performAction(int& action);
 };
 
 #endif // PLAYER_H

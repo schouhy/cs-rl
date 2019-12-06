@@ -40,13 +40,13 @@ int Runner::processSFMLEvents()
                 m_Window->close();
         }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
-        action |= Left;
+        action |= StrafLeft;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
-        action |=  Right;
+        action |=  StrafRight;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-        action |=  Down;
+        action |=  Backward;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
-        action |=  Up;
+        action |=  Forward;
     return action;
 }
 

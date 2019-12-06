@@ -16,9 +16,11 @@ Visualization::~Visualization()
 void Visualization::update()
 {
     const Player *player = m_Environment->getPlayer();
-    m_EntityShape.setPosition(player->getPosition().first, player->getPosition().second);
-    m_EntityShape.setSize(sf::Vector2f(player->getHeight(), player->getWidth()));
-    m_EntityShape.setFillColor(sf::Color::Green); 
+    m_EntityShape.setPosition(player->getPosition().x, player->getPosition().y);
+    m_EntityShape.setRadius(player->getHeight()); //, player->getWidth()));
+    m_EntityShape.setPointCount(3);
+    m_EntityShape.setFillColor(sf::Color::Green);
+    // m_EntityShape.setRotation(45);
 }
 
 void Visualization::render(sf::RenderTarget *target)

@@ -3,13 +3,15 @@
 
 #include <iostream>
 #include <chrono>
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtx/vector_angle.hpp>
 
 
 class Entity
 {
 protected:
-    float m_X, m_Y;
+    glm::vec2 m_Position;
     float m_Width, m_Height;
 public:
     // Constructor / Destructor
@@ -17,7 +19,7 @@ public:
     virtual ~Entity();
 
     // Accesors
-    const std::pair<float, float> getPosition() const;
+    const glm::vec2 getPosition() const;
     const float getWidth() const;
     const float getHeight() const;
 

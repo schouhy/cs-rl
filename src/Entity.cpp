@@ -16,9 +16,9 @@ Entity::~Entity()
 
 // Accesors
 
-const std::pair<float, float> Entity::getPosition() const
+const glm::vec2 Entity::getPosition() const
 {
-    return {m_X, m_Y};
+    return m_Position;
 }
 
 const float Entity::getHeight() const
@@ -34,6 +34,6 @@ const float Entity::getWidth() const
 
 void Entity::setPosition(float x, float y)
 {
-    m_X = x;
-    m_Y = y;
+    m_Position.x = x;
+    m_Position.y = y;
 }

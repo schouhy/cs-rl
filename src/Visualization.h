@@ -7,7 +7,7 @@ class Visualization
 {
 private:
     Environment *m_Environment;
-    sf::RectangleShape m_EntityShape;
+    sf::CircleShape m_EntityShape;
     
 public:
     // Constructor / Destructor
