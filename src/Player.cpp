@@ -5,13 +5,21 @@
 Player::Player(float x, float y) : Entity(x, y)
 {
 
-    m_Direction.x = 0.f;
-    m_Direction.y = -1.f;
+    m_Direction.x = 1.f;
+    m_Direction.y = 0.f;
 }
 
 Player::~Player()
 {
 }
+
+// Accessors
+
+const glm::vec2 Player::getDirection() const
+{
+    return m_Direction;
+}
+
 
 // Functions
 
@@ -28,11 +36,7 @@ void Player::performAction(int& action)
         m_Position.y += m_Direction.x * 0.7f;
     }
     if (action & Forward)
-    {
         m_Position += m_Direction;
-    }
     if (action & Backward)
-    {
         m_Position -= m_Direction * 0.5f;
-    }
 }

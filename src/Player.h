@@ -24,6 +24,10 @@ public:
     Player(float x, float y);
     ~Player();
 
+    // Accessors
+    const glm::vec2 getDirection() const;
+
+
     // Functions
     void performAction(int& action);
 };
