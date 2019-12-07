@@ -12,7 +12,7 @@ private:
     // Player 
     PlayerAnimation *m_PlayerAnimation;
     sf::Sprite m_PlayerSprite;
-    sf::Texture m_PlayerTexture;
+    std::vector<sf::Texture*> m_PlayerTextures;
     
 public:
     // Constructor / Destructor

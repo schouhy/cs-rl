@@ -3,8 +3,6 @@
 
 #include "Visualization.h"
 
-#define TIME_PER_FRAME 1.f/60.f
-
 class Runner
 {
 public:
@@ -24,6 +22,7 @@ private:
 
     //Variables
     Environment *m_Environment;
+    sf::Clock m_Clock;
 
     sf::RenderWindow *m_Window;    
     Visualization *m_Visualization;

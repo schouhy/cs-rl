@@ -1,6 +1,5 @@
 #include "Runner.h"
 
-#define MOUSEPOSITION 200
 
 // Constructor / Destructor
 Runner::Runner()
@@ -79,12 +78,11 @@ void Runner::render()
 
 void Runner::run()
 {
-    sf::Clock clock;
     m_TimeSinceLastUpdate = sf::Time::Zero;
     sf::Time TimePerFrame = sf::seconds(TIME_PER_FRAME);
     while (m_Window->isOpen())
     {
-        m_TimeSinceLastUpdate += clock.restart();
+        m_TimeSinceLastUpdate += m_Clock.restart();
         while (m_TimeSinceLastUpdate > TimePerFrame)
         {
             m_TimeSinceLastUpdate -= TimePerFrame;

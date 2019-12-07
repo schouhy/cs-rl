@@ -3,9 +3,13 @@
 
 #include <iostream>
 #include <chrono>
+#include <experimental/filesystem>
 #include <SFML/Graphics.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtx/vector_angle.hpp>
+
+#define TIME_PER_FRAME 1.f/60.f
+#define MOUSEPOSITION 200
 
 
 class Entity
