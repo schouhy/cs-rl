@@ -11,8 +11,9 @@ Visualization::Visualization(Environment *env)
 Visualization::~Visualization()
 {
     delete m_PlayerAnimation;
-    for (auto texture : m_PlayerTextures)
-        delete texture;
+    for (auto const& [key, val] : m_PlayerTextures)
+        for(auto texture : val)
+            delete texture;
 }
 
 // Initializers
@@ -20,12 +21,9 @@ Visualization::~Visualization()
 void Visualization::initPlayerSprites()
 {
     // Textures
-    std::string fname = "src/sprites/rifle/move/survivor-move_rifle_";
-    for (int index = 0; index < 20; ++index) // Temporal
-    {
-        m_PlayerTextures.emplace_back(new sf::Texture);
-        m_PlayerTextures.back()->loadFromFile(fname + std::to_string(index) + ".png");
-    }
+    //   move
+    loadTexturesFromFolder("src/sprites/rifle/move/", "Forward");
+    loadTexturesFromFolder("src/sprites/rifle/idle/", "Idle");
     
     // Sprites
     m_PlayerAnimation = new PlayerAnimation(m_PlayerSprite, *m_Environment->getPlayer(), m_PlayerTextures);
@@ -33,16 +31,27 @@ void Visualization::initPlayerSprites()
 
 // Functions
 
-void Visualization::update()
-{
-    updatePlayerAnimation();
-}
-
 
 void Visualization::updatePlayerAnimation()
 {
     m_PlayerAnimation->update();
 }
+
+
+void Visualization::loadTexturesFromFolder(std::string path, std::string key)
+{
+    for (int index = 0; index < 20; ++index) // Temporal
+    {
+        m_PlayerTextures[key].emplace_back(new sf::Texture);
+        m_PlayerTextures[key].back()->loadFromFile(path + std::to_string(index) + ".png");
+    }
+}
+
+void Visualization::update()
+{
+    updatePlayerAnimation();
+}
+
 
 
 void Visualization::render(sf::RenderTarget *target)

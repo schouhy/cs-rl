@@ -3,7 +3,7 @@
 
 // Constructor / Destructor
 
-PlayerAnimation::PlayerAnimation(sf::Sprite& sprite, const Player& player, std::vector<sf::Texture*>& textures)
+PlayerAnimation::PlayerAnimation(sf::Sprite& sprite, const Player& player, std::map<std::string, std::vector<sf::Texture*>>& textures)
     : m_Sprite(sprite), m_Player(player), m_Textures(textures), m_PlayerLastState(0), m_CurrentIndex(0)
 {
 }
@@ -19,20 +19,29 @@ void PlayerAnimation::update()
     // Resets animation when changing movement state
     checkReset();
 
+    // Chooses animation
     if(m_Player.getMovementState() == Idle)
     {
-        m_Sprite.setTexture(*m_Textures[0]);
+        m_TimeSinceLastUpdate += m_Clock.restart();
+        if (m_TimeSinceLastUpdate > sf::seconds(TIME_PER_FRAME*4))
+        {
+            m_Sprite.setTexture(*m_Textures["Idle"][m_CurrentIndex % 20]);
+            m_CurrentIndex += 1;
+            m_TimeSinceLastUpdate = sf::Time::Zero;
+        }
     }
     else
     {
         m_TimeSinceLastUpdate += m_Clock.restart();
         if (m_TimeSinceLastUpdate > sf::seconds(TIME_PER_FRAME))
         {
-            m_Sprite.setTexture(*m_Textures[m_CurrentIndex % 20]);
+            m_Sprite.setTexture(*m_Textures["Forward"][m_CurrentIndex % 20]);
             m_CurrentIndex += 1;
             m_TimeSinceLastUpdate = sf::Time::Zero;
         }
     }
+
+    // Transformations
     m_Sprite.setPosition(m_Player.getPosition().x, m_Player.getPosition().y);
     m_Sprite.setOrigin(95., 120.);
     m_Sprite.setScale(sf::Vector2f(0.4, 0.4));

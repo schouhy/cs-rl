@@ -12,18 +12,21 @@ private:
     // Player 
     PlayerAnimation *m_PlayerAnimation;
     sf::Sprite m_PlayerSprite;
-    std::vector<sf::Texture*> m_PlayerTextures;
-    
-public:
-    // Constructor / Destructor
-    Visualization(Environment *env);
-    ~Visualization();
+    std::map<std::string, std::vector<sf::Texture*>> m_PlayerTextures;
 
     // Initializers
     void initPlayerSprites();
 
     // Functions
     void updatePlayerAnimation();
+    void loadTexturesFromFolder(std::string path, std::string key);
+
+public:
+    // Constructor / Destructor
+    Visualization(Environment *env);
+    ~Visualization();
+
+    // Functions
     void update();
     void render(sf::RenderTarget *target);
 };

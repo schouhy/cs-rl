@@ -8,7 +8,7 @@ class PlayerAnimation
 private:
     const Player& m_Player;
     sf::Sprite& m_Sprite;
-    std::vector<sf::Texture*>& m_Textures;
+    std::map<std::string, std::vector<sf::Texture*>>& m_Textures;
     int m_PlayerLastState;
     sf::Time m_TimeSinceLastUpdate;
     int m_CurrentIndex;
@@ -17,7 +17,7 @@ private:
 
 public:
     // Constructor / Destructor
-    PlayerAnimation(sf::Sprite& sprite, const Player& player, std::vector<sf::Texture*>& textures);
+    PlayerAnimation(sf::Sprite& sprite, const Player& player, std::map<std::string, std::vector<sf::Texture*>>& textures);
     ~PlayerAnimation();
 
     // Functions
