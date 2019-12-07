@@ -2,7 +2,7 @@
 #define VISUALIZATION_H
 
 #include "Environment.h"
-//#include "Animation.h"
+#include "PlayerAnimation.h"
 
 class Visualization
 {
@@ -10,7 +10,7 @@ private:
     Environment *m_Environment;
     
     // Player 
-    //std::map<std::string, Animation> m_Animations;
+    PlayerAnimation *m_PlayerAnimation;
     sf::Sprite m_PlayerSprite;
     sf::Texture m_PlayerTexture;
     
