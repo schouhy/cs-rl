@@ -12,7 +12,7 @@ VisualizationLayer::VisualizationLayer(Environment *env)
 VisualizationLayer::~VisualizationLayer()
 {
     delete m_PlayerVisualization;
-    for (auto const& [key, val] : m_PlayerBodyTextures)
+    for (auto const& [key, val] : m_PlayerTextures)
         for(auto texture : val)
             delete texture;
 }
@@ -23,14 +23,11 @@ void VisualizationLayer::initPlayerSprites()
 {
     // Textures
     //   body
-    loadTexturesFromFolder(20, "src/sprites/player/rifle/move/", "Forward", m_PlayerBodyTextures);
-    loadTexturesFromFolder(20, "src/sprites/player/rifle/idle/", "Idle", m_PlayerBodyTextures);
-    //   feet
-    loadTexturesFromFolder(20, "src/sprites/player/feet/run/", "Forward", m_PlayerFeetTextures);
-    loadTexturesFromFolder(1, "src/sprites/player/feet/idle/", "Idle", m_PlayerFeetTextures);
+    loadTexturesFromFolder(20, "src/sprites/player/rifle/move/", "Forward", m_PlayerTextures);
+    loadTexturesFromFolder(20, "src/sprites/player/rifle/idle/", "Idle", m_PlayerTextures);
     
     // Sprites
-    m_PlayerVisualization = new PlayerVisualization(*m_Environment->getPlayer(), m_PlayerBodyTextures, m_PlayerFeetTextures);
+    m_PlayerVisualization = new PlayerAnimation(*m_Environment->getPlayer(), m_PlayerTextures);
 }
 
 // Functions

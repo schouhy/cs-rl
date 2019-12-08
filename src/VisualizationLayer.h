@@ -2,7 +2,7 @@
 #define VISUALIZATIONLAYER_H
 
 #include "Environment.h"
-#include "PlayerVisualization.h"
+#include "PlayerAnimation.h"
 #include "Layer.h"
 
 
@@ -12,10 +12,9 @@ private:
     Environment *m_Environment;
     
     // Player 
-    PlayerVisualization *m_PlayerVisualization;
+    PlayerAnimation *m_PlayerVisualization;
     //sf::Sprite m_PlayerSprite;
-    std::map<std::string, std::vector<sf::Texture*>> m_PlayerBodyTextures;
-    std::map<std::string, std::vector<sf::Texture*>> m_PlayerFeetTextures;
+    std::map<std::string, std::vector<sf::Texture*>> m_PlayerTextures;
 
     // Initializers
     void initPlayerSprites();
