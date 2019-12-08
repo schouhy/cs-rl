@@ -5,6 +5,7 @@
 VisualizationStack::VisualizationStack(Environment *env)
 {
     m_Environment = env;
+    initTextures();
     initPlayerSprites();
 }
 
@@ -18,13 +19,20 @@ VisualizationStack::~VisualizationStack()
 
 // Initializers
 
-void VisualizationStack::initPlayerSprites()
+void VisualizationStack::initTextures()
 {
-    // Textures
+    //Background
+    m_BackgroundTexture.setRepeated(true);
+    m_BackgroundTexture.loadFromFile("src/sprites/map/bckg.jpg");
+    // Player
     loadTexturesFromFolder(20, "src/sprites/player/rifle/move/", "Forward", m_PlayerTextures);
     loadTexturesFromFolder(20, "src/sprites/player/rifle/idle/", "Idle", m_PlayerTextures);
-    
-    // Sprites
+    loadTexturesFromFolder(3, "src/sprites/player/rifle/shoot/", "Shoot", m_PlayerTextures);
+}
+
+void VisualizationStack::initPlayerSprites()
+{
+    m_Layers.push_back(new BackgroundLayer(m_BackgroundTexture));
     m_Layers.push_back(new PlayerAnimation(*m_Environment->getPlayer(), m_PlayerTextures));
 }
 

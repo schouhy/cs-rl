@@ -23,6 +23,7 @@ private:
     // Functions
     void checkReset();
     void transform();
+    void playNextFrame(std::string key, int speed_factor);
 
 public:
     // Constructor / Destructor

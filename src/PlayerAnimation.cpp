@@ -32,34 +32,30 @@ void PlayerAnimation::transform()
     m_Sprite.setRotation(glm::orientedAngle(glm::vec2(1.f,0.f), glm::normalize(m_Player.getDirection()))*180.f/3.14159f);
 }
 
+void PlayerAnimation::playNextFrame(std::string key, int speed_factor)
+{
+    m_TimeSinceLastUpdate += m_Clock.restart();
+    if (m_TimeSinceLastUpdate > sf::seconds(TIME_PER_FRAME*speed_factor))
+    {
+        m_Sprite.setTexture(*m_Textures[key][m_CurrentIndex],true);
+        m_CurrentIndex += 1;
+        m_CurrentIndex = m_CurrentIndex % m_Textures[key].size();
+        m_TimeSinceLastUpdate = sf::Time::Zero;
+    }
+}
+
 void PlayerAnimation::update()
 {
     // Resets animation when changing movement state
     checkReset();
 
     // Chooses animation
-    if(m_Player.getMovementState() == Idle)
-    {
-        m_TimeSinceLastUpdate += m_Clock.restart();
-        if (m_TimeSinceLastUpdate > sf::seconds(TIME_PER_FRAME*4))
-        {
-            m_Sprite.setTexture(*m_Textures["Idle"][m_CurrentIndex],true);
-            m_CurrentIndex += 1;
-            m_CurrentIndex = m_CurrentIndex % m_Textures["Idle"].size();
-            m_TimeSinceLastUpdate = sf::Time::Zero;
-        }
-    }
+    if(m_Player.getMovementState() == Forward)
+        playNextFrame("Forward", 1);
+    else if(m_Player.getMovementState() & Shoot)
+        playNextFrame("Shoot", 1);
     else
-    {
-        m_TimeSinceLastUpdate += m_Clock.restart();
-        if (m_TimeSinceLastUpdate > sf::seconds(TIME_PER_FRAME))
-        {
-            m_Sprite.setTexture(*m_Textures["Forward"][m_CurrentIndex], true);
-            m_CurrentIndex += 1;
-            m_CurrentIndex = m_CurrentIndex % m_Textures["Forward"].size();
-            m_TimeSinceLastUpdate = sf::Time::Zero;
-        }
-    }
+        playNextFrame("Idle", 4);
     transform();
 }
 

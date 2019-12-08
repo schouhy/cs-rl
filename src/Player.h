@@ -12,7 +12,8 @@ enum Action
     StrafeRight = BIT(1), 
     Forward    = BIT(2), 
     Backward   = BIT(3),
-    Walk       = BIT(4)
+    Walk       = BIT(4),
+    Shoot      = BIT(5)
 };
 
 
