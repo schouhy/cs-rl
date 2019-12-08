@@ -2,27 +2,35 @@
 #define PLAYERANIMATION_H
 
 #include "Player.h"
+#include "Layer.h"
 
-class PlayerAnimation
+using textures_map = std::map<std::string, std::vector<sf::Texture*>>;
+
+
+class PlayerAnimation : public Layer
 {
 private:
     const Player& m_Player;
     sf::Sprite& m_Sprite;
     std::map<std::string, std::vector<sf::Texture*>>& m_Textures;
-    int m_PlayerLastState;
+    int m_LastState;
     sf::Time m_TimeSinceLastUpdate;
     int m_CurrentIndex;
 
     sf::Clock m_Clock;
 
+    // Functions
+    void checkReset();
+
+
 public:
     // Constructor / Destructor
-    PlayerAnimation(sf::Sprite& sprite, const Player& player, std::map<std::string, std::vector<sf::Texture*>>& textures);
+    PlayerAnimation(const Player& player, sf::Sprite& sprite, textures_map& textures);
     ~PlayerAnimation();
 
     // Functions
     void update();
-    void checkReset();
+    void render(sf::RenderTarget *target);
 };
 
 #endif // PLAYERANIMATION_H

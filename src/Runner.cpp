@@ -23,7 +23,7 @@ void Runner::initWindow()
     m_Window =  new sf::RenderWindow(sf::VideoMode(640, 480), "Las tinieblas de sasa");
     m_Window->setFramerateLimit(90);
     m_Window->setVerticalSyncEnabled(true);
-    m_Window->setMouseCursorVisible(false);
+    //m_Window->setMouseCursorVisible(false);
 }
 
 
@@ -59,7 +59,8 @@ void Runner::processSFMLEvents(int& pos_action, float& angle_action)
         pos_action |= Walk;
     angle_action = (sf::Mouse::getPosition().x - MOUSEPOSITION)/500.f;
 
-    sf::Mouse::setPosition(sf::Vector2i(MOUSEPOSITION, MOUSEPOSITION));
+    //sf::Mouse::setPosition(sf::Vector2i(MOUSEPOSITION, MOUSEPOSITION));
+    std::cout << sf::Mouse::getPosition(*m_Window).x << " " << sf::Mouse::getPosition(*m_Window).y << std::endl;
 }
 
 void Runner::updateLogic()

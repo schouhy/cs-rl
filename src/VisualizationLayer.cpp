@@ -11,8 +11,8 @@ VisualizationLayer::VisualizationLayer(Environment *env)
 
 VisualizationLayer::~VisualizationLayer()
 {
-    delete m_PlayerAnimation;
-    for (auto const& [key, val] : m_PlayerTextures)
+    delete m_PlayerVisualization;
+    for (auto const& [key, val] : m_PlayerBodyTextures)
         for(auto texture : val)
             delete texture;
 }
@@ -22,13 +22,15 @@ VisualizationLayer::~VisualizationLayer()
 void VisualizationLayer::initPlayerSprites()
 {
     // Textures
-    //   move
-    loadTexturesFromFolder("src/sprites/player/rifle/move/", "Forward");
-    //   idle
-    loadTexturesFromFolder("src/sprites/player/rifle/idle/", "Idle");
+    //   body
+    loadTexturesFromFolder(20, "src/sprites/player/rifle/move/", "Forward", m_PlayerBodyTextures);
+    loadTexturesFromFolder(20, "src/sprites/player/rifle/idle/", "Idle", m_PlayerBodyTextures);
+    //   feet
+    loadTexturesFromFolder(20, "src/sprites/player/feet/run/", "Forward", m_PlayerFeetTextures);
+    loadTexturesFromFolder(1, "src/sprites/player/feet/idle/", "Idle", m_PlayerFeetTextures);
     
     // Sprites
-    m_PlayerAnimation = new PlayerAnimation(m_PlayerSprite, *m_Environment->getPlayer(), m_PlayerTextures);
+    m_PlayerVisualization = new PlayerVisualization(*m_Environment->getPlayer(), m_PlayerBodyTextures, m_PlayerFeetTextures);
 }
 
 // Functions
@@ -36,16 +38,16 @@ void VisualizationLayer::initPlayerSprites()
 
 void VisualizationLayer::updatePlayerAnimation()
 {
-    m_PlayerAnimation->update();
+    m_PlayerVisualization->update();
 }
 
 
-void VisualizationLayer::loadTexturesFromFolder(std::string path, std::string key)
+void VisualizationLayer::loadTexturesFromFolder(int number, std::string path, std::string key, std::map<std::string, std::vector<sf::Texture*>>& map)
 {
-    for (int index = 0; index < 20; ++index)
+    for (int index = 0; index < number; ++index)
     {
-        m_PlayerTextures[key].emplace_back(new sf::Texture);
-        m_PlayerTextures[key].back()->loadFromFile(path + std::to_string(index) + ".png");
+        map[key].push_back(new sf::Texture);
+        map[key].back()->loadFromFile(path + std::to_string(index) + ".png");
     }
 }
 
@@ -58,7 +60,7 @@ void VisualizationLayer::update()
 
 void VisualizationLayer::render(sf::RenderTarget *target)
 {
-    target->draw(m_PlayerSprite);
+    m_PlayerVisualization->render(target);
 }
 
 
