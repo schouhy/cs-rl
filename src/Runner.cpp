@@ -35,7 +35,7 @@ void Runner::initEnvironment()
 
 void Runner::initLayerStack()
 {
-    m_LayerStack.push(std::make_shared<VisualizationLayer>(m_Environment));
+    m_StateStack.push(std::make_shared<VisualizationStack>(m_Environment));
 }
 
 
@@ -76,10 +76,10 @@ void Runner::render()
     m_Window->clear(sf::Color(34,139,34));
 
     // Render top of m_LayerStack
-    if (!m_LayerStack.empty())
+    if (!m_StateStack.empty())
     {
-        m_LayerStack.top()->update();
-        m_LayerStack.top()->render(m_Window);
+        m_StateStack.top()->update();
+        m_StateStack.top()->render(m_Window);
     }
     m_Window->display();
 }

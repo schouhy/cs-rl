@@ -26,16 +26,10 @@ void PlayerAnimation::checkReset()
 
 void PlayerAnimation::transform()
 {
-    // Transformations
     m_Sprite.setPosition(m_Player.getPosition().x, m_Player.getPosition().y);
     m_Sprite.setOrigin(95.f, 120.f);
     m_Sprite.setScale(sf::Vector2f(0.4f, 0.4f));
     m_Sprite.setRotation(glm::orientedAngle(glm::vec2(1.f,0.f), glm::normalize(m_Player.getDirection()))*180.f/3.14159f);
-
-    //m_FeetSprite.setPosition(300., 300.);//m_Player.getPosition().x, m_Player.getPosition().y);
-    //m_FeetSprite.setOrigin(95., 120.);
-    //m_FeetSprite.setScale(sf::Vector2f(0.4, 0.4));
-    //m_FeetSprite.setRotation(glm::orientedAngle(glm::vec2(1.,0.), glm::normalize(m_Player.getDirection()))*180.f/3.14159f);
 }
 
 void PlayerAnimation::update()
