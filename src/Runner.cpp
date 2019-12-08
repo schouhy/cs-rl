@@ -6,8 +6,9 @@ Runner::Runner()
 {
     initWindow();
     initEnvironment();
-    sf::Mouse::setPosition(sf::Vector2i(MOUSEPOSITION, MOUSEPOSITION));
+    initLayerStack();
 }
+
 
 Runner::~Runner() 
 {
@@ -25,10 +26,16 @@ void Runner::initWindow()
     m_Window->setMouseCursorVisible(false);
 }
 
+
 void Runner::initEnvironment()
 {
     m_Environment = new Environment();
-    m_Visualization = new Visualization(m_Environment);
+}
+
+
+void Runner::initLayerStack()
+{
+    m_LayerStack.push(std::make_shared<VisualizationLayer>(m_Environment));
 }
 
 
@@ -51,7 +58,7 @@ void Runner::processSFMLEvents(int& pos_action, float& angle_action)
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
         pos_action |= Walk;
     angle_action = (sf::Mouse::getPosition().x - MOUSEPOSITION)/500.f;
-    //m_CurrentMouse_x = new_CurrentMouse_x;
+
     sf::Mouse::setPosition(sf::Vector2i(MOUSEPOSITION, MOUSEPOSITION));
 }
 
@@ -65,15 +72,15 @@ void Runner::updateLogic()
 
 void Runner::render() 
 {
-    m_Window->clear();
+    m_Window->clear(sf::Color(34,139,34));
 
-    // Render
-    m_Visualization->update();
-    m_Visualization->render(m_Window);
-
-
+    // Render top of m_LayerStack
+    if (!m_LayerStack.empty())
+    {
+        m_LayerStack.top()->update();
+        m_LayerStack.top()->render(m_Window);
+    }
     m_Window->display();
-
 }
 
 void Runner::run()

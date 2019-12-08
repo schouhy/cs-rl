@@ -1,14 +1,15 @@
-#include "Visualization.h"
+#include "VisualizationLayer.h"
 
 // Constructor / Destructor
-Visualization::Visualization(Environment *env)
+
+VisualizationLayer::VisualizationLayer(Environment *env)
 {
     m_Environment = env;
     initPlayerSprites();
 }
 
 
-Visualization::~Visualization()
+VisualizationLayer::~VisualizationLayer()
 {
     delete m_PlayerAnimation;
     for (auto const& [key, val] : m_PlayerTextures)
@@ -18,12 +19,13 @@ Visualization::~Visualization()
 
 // Initializers
 
-void Visualization::initPlayerSprites()
+void VisualizationLayer::initPlayerSprites()
 {
     // Textures
     //   move
-    loadTexturesFromFolder("src/sprites/rifle/move/", "Forward");
-    loadTexturesFromFolder("src/sprites/rifle/idle/", "Idle");
+    loadTexturesFromFolder("src/sprites/player/rifle/move/", "Forward");
+    //   idle
+    loadTexturesFromFolder("src/sprites/player/rifle/idle/", "Idle");
     
     // Sprites
     m_PlayerAnimation = new PlayerAnimation(m_PlayerSprite, *m_Environment->getPlayer(), m_PlayerTextures);
@@ -32,29 +34,29 @@ void Visualization::initPlayerSprites()
 // Functions
 
 
-void Visualization::updatePlayerAnimation()
+void VisualizationLayer::updatePlayerAnimation()
 {
     m_PlayerAnimation->update();
 }
 
 
-void Visualization::loadTexturesFromFolder(std::string path, std::string key)
+void VisualizationLayer::loadTexturesFromFolder(std::string path, std::string key)
 {
-    for (int index = 0; index < 20; ++index) // Temporal
+    for (int index = 0; index < 20; ++index)
     {
         m_PlayerTextures[key].emplace_back(new sf::Texture);
         m_PlayerTextures[key].back()->loadFromFile(path + std::to_string(index) + ".png");
     }
 }
 
-void Visualization::update()
+void VisualizationLayer::update()
 {
     updatePlayerAnimation();
 }
 
 
 
-void Visualization::render(sf::RenderTarget *target)
+void VisualizationLayer::render(sf::RenderTarget *target)
 {
     target->draw(m_PlayerSprite);
 }

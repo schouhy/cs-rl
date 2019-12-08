@@ -4,6 +4,8 @@
 #include <iostream>
 #include <chrono>
 #include <experimental/filesystem>
+#include <stack>
+
 #include <SFML/Graphics.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtx/vector_angle.hpp>

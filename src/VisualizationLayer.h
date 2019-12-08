@@ -1,10 +1,12 @@
-#ifndef VISUALIZATION_H
-#define VISUALIZATION_H
+#ifndef VISUALIZATIONLAYER_H
+#define VISUALIZATIONLAYER_H
 
 #include "Environment.h"
 #include "PlayerAnimation.h"
+#include "Layer.h"
 
-class Visualization
+
+class VisualizationLayer : public Layer
 {
 private:
     Environment *m_Environment;
@@ -23,13 +25,13 @@ private:
 
 public:
     // Constructor / Destructor
-    Visualization(Environment *env);
-    ~Visualization();
+    VisualizationLayer(Environment *env);
+    virtual ~VisualizationLayer() override;
 
     // Functions
-    void update();
-    void render(sf::RenderTarget *target);
+    virtual void update() override;
+    virtual void render(sf::RenderTarget *target) override;
 };
 
 
-#endif
+#endif // VISUALIZATIONLAYER_H

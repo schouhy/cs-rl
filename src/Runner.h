@@ -1,7 +1,7 @@
 #ifndef RUNNER_H
 #define RUNNER_H
 
-#include "Visualization.h"
+#include "VisualizationLayer.h"
 
 class Runner
 {
@@ -18,6 +18,7 @@ public:
 private:
     //Initializers
     void initWindow();
+    void initLayerStack();
     void initEnvironment();
 
     //Variables
@@ -25,7 +26,7 @@ private:
     sf::Clock m_Clock;
 
     sf::RenderWindow *m_Window;    
-    Visualization *m_Visualization;
+    std::stack<std::shared_ptr<Layer>> m_LayerStack;
     sf::Event m_Event;
     sf::Time m_TimeSinceLastUpdate;
 };
