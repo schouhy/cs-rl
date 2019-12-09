@@ -16,6 +16,12 @@ enum Action
     Shoot       = BIT(5)
 };
 
+struct ActionInput
+{
+    int pos_action = 0;
+    float angle_action = 0.f;
+};
+
 
 class Player : public Entity
 {
@@ -32,7 +38,7 @@ public:
     const int getMovementState() const;
 
     // Functions
-    void performAction(int& pos_action, float& angle_action);
+    void performAction(ActionInput *input);
 };
 
 #endif // PLAYER_H

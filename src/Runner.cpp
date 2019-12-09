@@ -40,7 +40,7 @@ void Runner::initLayerStack()
 
 
 // Functions
-void Runner::processSFMLEvents(int& pos_action, float& angle_action)
+void Runner::processSFMLEvents(ActionInput& input)
 {
     while (m_Window->pollEvent(m_Event))
         {
@@ -48,18 +48,18 @@ void Runner::processSFMLEvents(int& pos_action, float& angle_action)
                 m_Window->close();
         }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-        pos_action |= StrafeLeft;
+        input.pos_action |= StrafeLeft;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-        pos_action |=  StrafeRight;
+        input.pos_action |=  StrafeRight;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-        pos_action |=  Backward;
+        input.pos_action |=  Backward;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-        pos_action |=  Forward;
+        input.pos_action |=  Forward;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
-        pos_action |= Walk;
+        input.pos_action |= Walk;
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-        pos_action |= Shoot;
-    angle_action = (sf::Mouse::getPosition().x - MOUSEPOSITION)/500.f;
+        input.pos_action |= Shoot;
+    input.angle_action = (sf::Mouse::getPosition().x - MOUSEPOSITION)/500.f;
 
     sf::Mouse::setPosition(sf::Vector2i(MOUSEPOSITION, MOUSEPOSITION));
     //std::cout << sf::Mouse::getPosition(*m_Window).x << " " << sf::Mouse::getPosition(*m_Window).y << std::endl;
@@ -67,10 +67,11 @@ void Runner::processSFMLEvents(int& pos_action, float& angle_action)
 
 void Runner::updateLogic()
 {
-    int pos_action = 0;
-    float angle_action;
-    processSFMLEvents(pos_action, angle_action);
-    m_Environment->step(pos_action, angle_action);
+    ActionInput user_input;
+    ActionInput dummy_input = {Forward, 0.01f};
+    processSFMLEvents(user_input);
+    const std::vector<ActionInput*> inputs = {&user_input, &dummy_input};
+    m_Environment->step(inputs);
 }
 
 void Runner::render() 

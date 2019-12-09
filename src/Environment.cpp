@@ -23,9 +23,10 @@ const std::vector<Player*> Environment::getPlayers()
 
 // Functions
 
-void Environment::step(int& pos_action, float& angle_action)
+void Environment::step(const std::vector<ActionInput*>& inputs)
 {
-    m_Players.at(0)->performAction(pos_action, angle_action);
+    m_Players.at(0)->performAction(inputs.at(0));
+    m_Players.at(1)->performAction(inputs.at(1));
 }
 
 bool Environment::isDone()

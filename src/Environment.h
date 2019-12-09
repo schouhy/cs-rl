@@ -17,7 +17,7 @@ public:
     // Accesors
     const std::vector<Player*> getPlayers();
     // Functions
-    void step(int& pos_action, float& angle_action);
+    void step(const std::vector<ActionInput*>& input);
     bool isDone();
 };
 
