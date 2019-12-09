@@ -4,9 +4,9 @@
 
 Player::Player(float x, float y) : Entity(x, y)
 {
-
     m_Direction.x = 1.f;
     m_Direction.y = 0.f;
+    m_MovementState = 0;
 }
 
 Player::~Player()

@@ -7,7 +7,7 @@ class Environment
 {
 private:
     bool m_Done;
-    Player *m_Player;
+    std::vector<Player*> m_Players;
     
 public:
     //Constructor / Destructor
@@ -15,10 +15,10 @@ public:
     ~Environment();
 
     // Accesors
-    const Player * const getPlayer() const;
+    const std::vector<Player*> getPlayers();
     // Functions
     void step(int& pos_action, float& angle_action);
-    bool isDone() const;
+    bool isDone();
 };
 
 #endif

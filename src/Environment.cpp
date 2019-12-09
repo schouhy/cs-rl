@@ -4,29 +4,31 @@
 Environment::Environment() 
 {
     m_Done = false;
-    m_Player = new Player(50.f, 50.f);
+    m_Players.push_back(new Player(50.f, 50.f));
+    m_Players.push_back(new Player(500.f, 500.f));
 }
 
 Environment::~Environment()
 {
-    delete m_Player;
+    for (auto player : m_Players)
+        delete player;
 }
 
 // Accesors
 
-const Player * const Environment::getPlayer() const 
+const std::vector<Player*> Environment::getPlayers()
 {
-    return m_Player;
+    return m_Players;
 }
 
 // Functions
 
 void Environment::step(int& pos_action, float& angle_action)
 {
-    m_Player->performAction(pos_action, angle_action);
+    m_Players.at(0)->performAction(pos_action, angle_action);
 }
 
-bool Environment::isDone() const
+bool Environment::isDone()
 {
     return m_Done;
 }

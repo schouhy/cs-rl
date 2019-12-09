@@ -20,7 +20,7 @@ Runner::~Runner()
 // Initializers
 void Runner::initWindow()
 {
-    m_Window =  new sf::RenderWindow(sf::VideoMode(640, 480), "Las tinieblas de sasa");
+    m_Window =  new sf::RenderWindow(sf::VideoMode(1024, 1024), "Las tinieblas de sasa");
     m_Window->setFramerateLimit(90);
     m_Window->setVerticalSyncEnabled(true);
     m_Window->setMouseCursorVisible(false);

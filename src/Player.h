@@ -10,10 +10,10 @@ enum Action
     Idle  = 0, 
     StrafeLeft  = BIT(0), 
     StrafeRight = BIT(1), 
-    Forward    = BIT(2), 
-    Backward   = BIT(3),
-    Walk       = BIT(4),
-    Shoot      = BIT(5)
+    Forward     = BIT(2), 
+    Backward    = BIT(3),
+    Walk        = BIT(4),
+    Shoot       = BIT(5)
 };
 
 

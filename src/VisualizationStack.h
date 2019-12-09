@@ -15,7 +15,7 @@ private:
     sf::Texture m_BackgroundTexture;
 
     // Initializers
-    void initPlayerSprites();
+    void initSprites();
     void initTextures();
 
     // Functions

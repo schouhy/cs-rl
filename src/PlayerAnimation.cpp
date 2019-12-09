@@ -4,7 +4,12 @@
 // Constructor / Destructor
 
 PlayerAnimation::PlayerAnimation(const Player& player, textures_map& textures)
-    : m_Player(player), m_Textures(textures), m_LastState(0), m_CurrentIndex(0)
+    : m_Player(player), m_Textures(textures), m_LastState(0), m_CurrentIndex(0), m_Color(sf::Color::White)
+{
+}
+
+PlayerAnimation::PlayerAnimation(const Player& player, textures_map& textures, sf::Color color)
+    : m_Player(player), m_Textures(textures), m_LastState(0), m_CurrentIndex(0), m_Color(color)
 {
 }
 
@@ -26,9 +31,10 @@ void PlayerAnimation::checkReset()
 
 void PlayerAnimation::transform()
 {
+    m_Sprite.setColor(m_Color);
     m_Sprite.setPosition(m_Player.getPosition().x, m_Player.getPosition().y);
     m_Sprite.setOrigin(95.f, 120.f);
-    m_Sprite.setScale(sf::Vector2f(0.4f, 0.4f));
+    m_Sprite.setScale(sf::Vector2f(0.3f, 0.3f));
     m_Sprite.setRotation(glm::orientedAngle(glm::vec2(1.f,0.f), glm::normalize(m_Player.getDirection()))*180.f/3.14159f);
 }
 

@@ -5,7 +5,7 @@
 
 Entity::Entity(float x, float y)
 {
-    setPosition(150.f, 150.f);
+    setPosition(x, y);
     m_Height = 15.f;
     m_Width = 15.f;
 }

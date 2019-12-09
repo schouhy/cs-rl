@@ -6,7 +6,7 @@ VisualizationStack::VisualizationStack(Environment *env)
 {
     m_Environment = env;
     initTextures();
-    initPlayerSprites();
+    initSprites();
 }
 
 
@@ -30,10 +30,14 @@ void VisualizationStack::initTextures()
     loadTexturesFromFolder(3, "src/sprites/player/rifle/shoot/", "Shoot", m_PlayerTextures);
 }
 
-void VisualizationStack::initPlayerSprites()
+void VisualizationStack::initSprites()
 {
+    // Background
     m_Layers.push_back(new BackgroundLayer(m_BackgroundTexture));
-    m_Layers.push_back(new PlayerAnimation(*m_Environment->getPlayer(), m_PlayerTextures));
+
+    // Players
+    for (auto player : m_Environment->getPlayers())
+        m_Layers.push_back(new PlayerAnimation(*player, m_PlayerTextures));
 }
 
 // Functions
