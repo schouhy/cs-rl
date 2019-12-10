@@ -15,7 +15,7 @@ protected:
 public:
     // Constructor / Destructor
     Entity(float x, float y);
-    virtual ~Entity();
+    virtual ~Entity() = default;
 
     // Accesors
     const glm::vec2 getPosition() const;

@@ -7,10 +7,6 @@ BackgroundLayer::BackgroundLayer(sf::Texture& texture)
     m_Sprite.setTexture(m_Texture);
 }
 
-BackgroundLayer::~BackgroundLayer()
-{
-}
-
 void BackgroundLayer::update()
 {
 }

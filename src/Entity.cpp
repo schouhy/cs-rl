@@ -8,9 +8,6 @@ Entity::Entity(float x, float y)
 {
 }
 
-Entity::~Entity()
-{
-}
 
 // Accesors
 

@@ -16,10 +16,10 @@ private:
     void processSFMLEvents(ActionInput& action);
 public:
     UserInputLayer(Environment *env, sf::Event& event);
-    ~UserInputLayer();
+    ~UserInputLayer() = default;
     // Functions
-    void update();
-    void render(sf::RenderTarget *target);
+    void update() override;
+    void render(sf::RenderTarget *target) override;
 };
 
 

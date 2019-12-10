@@ -5,10 +5,6 @@ UserInputLayer::UserInputLayer(Environment *env, sf::Event& event)
 {
 }
 
-UserInputLayer::~UserInputLayer()
-{
-}
-
 
 // Functions
 

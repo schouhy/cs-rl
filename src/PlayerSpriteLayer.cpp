@@ -13,9 +13,6 @@ PlayerSpriteLayer::PlayerSpriteLayer(const Player& player, textures_map& texture
 {
 }
 
-PlayerSpriteLayer::~PlayerSpriteLayer()
-{
-}
 
 // Functions
 

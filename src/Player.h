@@ -31,7 +31,7 @@ private:
 public:
     // Constructor / Destructor
     Player(float x, float y);
-    ~Player();
+    ~Player() = default;
 
     // Accessors
     const glm::vec2 getDirection() const;

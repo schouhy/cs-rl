@@ -13,8 +13,8 @@ public:
     virtual ~LayerStack();
 
     // Functions
-    void update();
-    void render(sf::RenderTarget *target);
+    void update() override;
+    void render(sf::RenderTarget *target) override;
 };
 
 #endif // LAYERSTACK_H

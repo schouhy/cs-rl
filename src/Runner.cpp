@@ -8,13 +8,6 @@ Runner::Runner()
     initLayerStack();
 }
 
-
-Runner::~Runner()
-{
-    delete m_Window;
-}
-
-
 // Initializers
 void Runner::initWindow()
 {

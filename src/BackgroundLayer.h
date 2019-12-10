@@ -1,7 +1,6 @@
 #ifndef BACKGROUNDLAYER_H
 #define BACKGROUNDLAYER_H
 
-#include "Entity.h"
 #include "Layer.h"
 
 class BackgroundLayer : public Layer
@@ -12,10 +11,10 @@ private:
 
 public:
     BackgroundLayer(sf::Texture& texture);
-    ~BackgroundLayer();
+    ~BackgroundLayer() = default;
 
-    void update();
-    void render(sf::RenderTarget *target);
+    void update() override;
+    void render(sf::RenderTarget *target) override;
 };
 
 #endif // BACKGROUNDLAYER_H

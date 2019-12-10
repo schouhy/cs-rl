@@ -22,7 +22,7 @@ private:
     sf::Time m_TimeSinceLastUpdate;
 public:
     Runner();
-    ~Runner();
+    ~Runner() = default;
 
     //Functions
     void run();

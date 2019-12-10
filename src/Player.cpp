@@ -7,9 +7,6 @@ Player::Player(float x, float y)
 {
 }
 
-Player::~Player()
-{
-}
 
 // Accessors
 
