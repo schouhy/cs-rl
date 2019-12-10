@@ -2,6 +2,8 @@
 #define RUNNER_H
 
 #include "InteractiveGameState.h"
+#include "MapEditorState.h"
+
 
 class Runner
 {

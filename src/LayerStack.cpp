@@ -1,6 +1,7 @@
 #include "LayerStack.h"
 
-LayerStack::LayerStack()
+LayerStack::LayerStack(sf::RenderWindow& window)
+    : Layer(window)
 {
 }
 
@@ -16,8 +17,8 @@ void LayerStack::update()
         layer->update();
 }
 
-void LayerStack::render(sf::RenderTarget *target)
+void LayerStack::render()
 {
     for (auto layer : m_Layers)
-        layer->render(target);
+        layer->render();
 }

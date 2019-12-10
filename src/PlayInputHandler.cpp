@@ -1,15 +1,21 @@
-#include "UserInputLayer.h"
+#include "PlayInputHandler.h"
 
-UserInputLayer::UserInputLayer(Environment *env, sf::Event& event)
-    : m_Environment(env), m_Event(event)
+PlayInputHandler::PlayInputHandler(sf::RenderWindow& window, Environment *env)
+    : Layer(window), m_Environment(env)
 {
 }
 
 
 // Functions
 
-void UserInputLayer::processSFMLEvents(ActionInput& input)
+void PlayInputHandler::processSFMLEvents(ActionInput& input)
 {
+    // Poll Window Events
+    while (m_Window.pollEvent(m_Event))
+    {
+        if (m_Event.type == sf::Event::Closed)
+            m_Window.close();
+    }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
         input.pos_action |= StrafeLeft;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
@@ -27,7 +33,7 @@ void UserInputLayer::processSFMLEvents(ActionInput& input)
     sf::Mouse::setPosition(sf::Vector2i(MOUSEPOSITION, MOUSEPOSITION));
 }
 
-void UserInputLayer::update()
+void PlayInputHandler::update()
 {
     ActionInput user_input;
     processSFMLEvents(user_input);
@@ -40,7 +46,7 @@ void UserInputLayer::update()
 }
 
 
-void UserInputLayer::render(sf::RenderTarget *target)
+void PlayInputHandler::render()
 {
     // Debug purposes
     // std::cout << sf::Mouse::getPosition(*m_Window).x << " " << sf::Mouse::getPosition(*m_Window).y << std::endl;

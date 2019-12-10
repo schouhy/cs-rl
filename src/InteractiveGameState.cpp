@@ -3,10 +3,11 @@
 
 // Constructcor / Destructor
 
-InteractiveGameState::InteractiveGameState(sf::Event& event)
+InteractiveGameState::InteractiveGameState(sf::RenderWindow& window)
+    : LayerStack(window)
 {
     initEnvironment();
-    initLayerStack(event);
+    initLayers();
 }
 
 InteractiveGameState::~InteractiveGameState()
@@ -23,10 +24,10 @@ void InteractiveGameState::initEnvironment()
 }
 
 
-void InteractiveGameState::initLayerStack(sf::Event& event)
+void InteractiveGameState::initLayers()
 {
-    m_Layers.push_back(new UserInputLayer(m_Environment, event));
-    m_Layers.push_back(new VisualizationStack(m_Environment));
+    m_Layers.push_back(new PlayInputHandler(m_Window, m_Environment));
+    m_Layers.push_back(new VisualizationStack(m_Window, m_Environment));
 }
 
 

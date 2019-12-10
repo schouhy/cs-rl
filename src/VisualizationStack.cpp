@@ -2,7 +2,8 @@
 
 // Constructor / Destructor
 
-VisualizationStack::VisualizationStack(Environment *env)
+VisualizationStack::VisualizationStack(sf::RenderWindow& window, Environment *env)
+    : LayerStack(window)
 {
     m_Environment = env;
     initTextures();
@@ -33,12 +34,12 @@ void VisualizationStack::initTextures()
 void VisualizationStack::initSprites()
 {
     // Background
-    m_Layers.push_back(new BackgroundLayer(m_BackgroundTexture));
+    m_Layers.push_back(new BackgroundLayer(m_Window, m_BackgroundTexture));
 
     // Players
     std::vector<sf::Color> colors = {sf::Color(255, 185, 185), sf::Color(128, 255, 128)};
     for (std::size_t i = 0; i < m_Environment->getPlayers().size(); ++i)
-        m_Layers.push_back(new PlayerSpriteLayer(*m_Environment->getPlayers()[i], m_PlayerTextures, colors[i]));
+        m_Layers.push_back(new PlayerSpriteLayer(m_Window, *m_Environment->getPlayers()[i], m_PlayerTextures, colors[i]));
 }
 
 // Functions

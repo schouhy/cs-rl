@@ -10,11 +10,11 @@ private:
     sf::Sprite m_Sprite;
 
 public:
-    BackgroundLayer(sf::Texture& texture);
+    BackgroundLayer(sf::RenderWindow& window, sf::Texture& texture);
     ~BackgroundLayer() = default;
 
     void update() override;
-    void render(sf::RenderTarget *target) override;
+    void render() override;
 };
 
 #endif // BACKGROUNDLAYER_H

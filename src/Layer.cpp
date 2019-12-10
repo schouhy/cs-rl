@@ -1,6 +1,7 @@
 #include "Layer.h"
 
-Layer::Layer() 
+Layer::Layer(sf::RenderWindow& window)
+    : m_Window(window)
 {
 }
 

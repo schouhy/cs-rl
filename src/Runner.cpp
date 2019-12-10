@@ -14,14 +14,15 @@ void Runner::initWindow()
     m_Window =  new sf::RenderWindow(sf::VideoMode(1024, 768), "Las tinieblas de sasa");
     m_Window->setFramerateLimit(90);
     m_Window->setVerticalSyncEnabled(true);
-    m_Window->setMouseCursorVisible(false);
+    m_Window->setMouseCursorVisible(SHOW_CURSOR);
 }
 
 
 
 void Runner::initLayerStack()
 {
-    m_StateStack.push(std::make_shared<InteractiveGameState>(m_Event));
+//    m_StateStack.push(std::make_unique<InteractiveGameState>(*m_Window));
+    m_StateStack.push(std::make_unique<MapEditorState>(*m_Window));
 }
 
 
@@ -34,19 +35,13 @@ void Runner::render()
     // Render top of m_LayerStack
     if (!m_StateStack.empty())
     {
-        m_StateStack.top()->render(m_Window);
+        m_StateStack.top()->render();
     }
     m_Window->display();
 }
 
 void Runner::update()
 {
-    // Poll Window Events
-    while (m_Window->pollEvent(m_Event))
-    {
-        if (m_Event.type == sf::Event::Closed)
-            m_Window->close();
-    }
     // Update top of m_LayerStack
     if (!m_StateStack.empty())
     {

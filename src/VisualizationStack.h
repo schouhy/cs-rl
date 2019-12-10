@@ -23,7 +23,7 @@ private:
 
 public:
     // Constructor / Destructor
-    VisualizationStack(Environment *env);
+    VisualizationStack(sf::RenderWindow& window, Environment *env);
     virtual ~VisualizationStack();
 };
 

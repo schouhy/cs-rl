@@ -27,13 +27,13 @@ private:
 
 public:
     // Constructor / Destructor
-    PlayerSpriteLayer(const Player& player, textures_map& textures);
-    PlayerSpriteLayer(const Player& player, textures_map& textures, sf::Color color);
+    PlayerSpriteLayer(sf::RenderWindow& window, const Player& player, textures_map& textures);
+    PlayerSpriteLayer(sf::RenderWindow& window, const Player& player, textures_map& textures, sf::Color color);
     ~PlayerSpriteLayer() = default;
 
     // Functions
     void update() override;
-    void render(sf::RenderTarget *target) override;
+    void render() override;
 };
 
 #endif // PLAYERANIMATION_H

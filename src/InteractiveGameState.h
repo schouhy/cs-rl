@@ -5,7 +5,7 @@
 #include "LayerStack.h"
 #include "Environment.h"
 #include "VisualizationStack.h"
-#include "UserInputLayer.h"
+#include "PlayInputHandler.h"
 
 class InteractiveGameState : public LayerStack
 {
@@ -14,7 +14,7 @@ private:
 
     // Initializers
     void initEnvironment(); 
-    void initLayerStack(sf::Event& event);
+    void initLayers();
 
     // Functions
     void processSFMLEvents(ActionInput& input);
@@ -22,7 +22,7 @@ private:
 
 public:
     // Constructor / Destructor
-    InteractiveGameState(sf::Event& event);
+    InteractiveGameState(sf::RenderWindow& window);
     ~InteractiveGameState();
 };
 

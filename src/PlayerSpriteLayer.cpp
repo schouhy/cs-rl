@@ -3,13 +3,13 @@
 
 // Constructor / Destructor
 
-PlayerSpriteLayer::PlayerSpriteLayer(const Player& player, textures_map& textures)
-    : m_Player(player), m_Textures(textures), m_LastState(0), m_CurrentIndex(0), m_Color(sf::Color::White)
+PlayerSpriteLayer::PlayerSpriteLayer(sf::RenderWindow& window, const Player& player, textures_map& textures)
+    : Layer(window), m_Player(player), m_Textures(textures), m_LastState(0), m_CurrentIndex(0), m_Color(sf::Color::White)
 {
 }
 
-PlayerSpriteLayer::PlayerSpriteLayer(const Player& player, textures_map& textures, sf::Color color)
-    : m_Player(player), m_Textures(textures), m_LastState(0), m_CurrentIndex(0), m_Color(color)
+PlayerSpriteLayer::PlayerSpriteLayer(sf::RenderWindow& window,const Player& player, textures_map& textures, sf::Color color)
+    :  Layer(window), m_Player(player), m_Textures(textures), m_LastState(0), m_CurrentIndex(0), m_Color(color)
 {
 }
 
@@ -62,7 +62,7 @@ void PlayerSpriteLayer::update()
     transform();
 }
 
-void PlayerSpriteLayer::render(sf::RenderTarget *target)
+void PlayerSpriteLayer::render()
 {
-    target->draw(m_Sprite);
+    m_Window.draw(m_Sprite);
 }
