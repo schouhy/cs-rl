@@ -2,7 +2,7 @@
 #define VISUALIZATIONSTACK_H
 
 #include "Environment.h"
-#include "PlayerAnimation.h"
+#include "PlayerSpriteLayer.h"
 #include "BackgroundLayer.h"
 #include "LayerStack.h"
 

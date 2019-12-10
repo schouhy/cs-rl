@@ -2,11 +2,9 @@
 
 //Constructor / Destructor
 
-Player::Player(float x, float y) : Entity(x, y)
+Player::Player(float x, float y) 
+    : Entity(x, y), m_Direction({1.3f, 0.f}), m_MovementState(0)
 {
-    m_Direction.x = 2.f;
-    m_Direction.y = 0.f;
-    m_MovementState = 0;
 }
 
 Player::~Player()

@@ -5,99 +5,75 @@
 Runner::Runner()
 {
     initWindow();
-    initEnvironment();
     initLayerStack();
 }
 
 
-Runner::~Runner() 
+Runner::~Runner()
 {
     delete m_Window;
-    delete m_Environment;
 }
 
 
 // Initializers
 void Runner::initWindow()
 {
-    m_Window =  new sf::RenderWindow(sf::VideoMode(1024, 1024), "Las tinieblas de sasa");
+    m_Window =  new sf::RenderWindow(sf::VideoMode(1024, 768), "Las tinieblas de sasa");
     m_Window->setFramerateLimit(90);
     m_Window->setVerticalSyncEnabled(true);
     m_Window->setMouseCursorVisible(false);
 }
 
 
-void Runner::initEnvironment()
-{
-    m_Environment = new Environment();
-}
-
 
 void Runner::initLayerStack()
 {
-    m_StateStack.push(std::make_shared<VisualizationStack>(m_Environment));
+    m_StateStack.push(std::make_shared<InteractiveGameState>(m_Event));
 }
 
 
 // Functions
-void Runner::processSFMLEvents(ActionInput& input)
-{
-    while (m_Window->pollEvent(m_Event))
-        {
-            if (m_Event.type == sf::Event::Closed)
-                m_Window->close();
-        }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-        input.pos_action |= StrafeLeft;
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-        input.pos_action |=  StrafeRight;
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-        input.pos_action |=  Backward;
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-        input.pos_action |=  Forward;
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
-        input.pos_action |= Walk;
-    if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-        input.pos_action |= Shoot;
-    input.angle_action = (sf::Mouse::getPosition().x - MOUSEPOSITION)/500.f;
 
-    sf::Mouse::setPosition(sf::Vector2i(MOUSEPOSITION, MOUSEPOSITION));
-    //std::cout << sf::Mouse::getPosition(*m_Window).x << " " << sf::Mouse::getPosition(*m_Window).y << std::endl;
-}
-
-void Runner::updateLogic()
-{
-    ActionInput user_input;
-    ActionInput dummy_input = {Forward, 0.01f};
-    processSFMLEvents(user_input);
-    const std::vector<ActionInput*> inputs = {&user_input, &dummy_input};
-    m_Environment->step(inputs);
-}
 
 void Runner::render() 
 {
-    m_Window->clear(sf::Color(34,139,34));
-
+    m_Window->clear(sf::Color(100, 100, 100));
     // Render top of m_LayerStack
     if (!m_StateStack.empty())
     {
-        m_StateStack.top()->update();
         m_StateStack.top()->render(m_Window);
     }
     m_Window->display();
+}
+
+void Runner::update()
+{
+    // Poll Window Events
+    while (m_Window->pollEvent(m_Event))
+    {
+        if (m_Event.type == sf::Event::Closed)
+            m_Window->close();
+    }
+    // Update top of m_LayerStack
+    if (!m_StateStack.empty())
+    {
+        m_StateStack.top()->update();
+    }
 }
 
 void Runner::run()
 {
     m_TimeSinceLastUpdate = sf::Time::Zero;
     sf::Time TimePerFrame = sf::seconds(TIME_PER_FRAME);
+    // Main Loop
     while (m_Window->isOpen())
     {
         m_TimeSinceLastUpdate += m_Clock.restart();
+        // Fixed time step
         while (m_TimeSinceLastUpdate > TimePerFrame)
         {
             m_TimeSinceLastUpdate -= TimePerFrame;
-            updateLogic();
+            update();
         }
         render();
     }

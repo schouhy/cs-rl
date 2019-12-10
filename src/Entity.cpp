@@ -3,11 +3,9 @@
 
 // Constructor / Destructor
 
-Entity::Entity(float x, float y)
+Entity::Entity(float x, float y) 
+    : m_Position({x, y}), m_Height(15.f), m_Width(15.f)
 {
-    setPosition(x, y);
-    m_Height = 15.f;
-    m_Width = 15.f;
 }
 
 Entity::~Entity()
@@ -29,11 +27,4 @@ const float Entity::getHeight() const
 const float Entity::getWidth() const
 {
     return m_Width;
-}
-// Functions
-
-void Entity::setPosition(float x, float y)
-{
-    m_Position.x = x;
-    m_Position.y = y;
 }

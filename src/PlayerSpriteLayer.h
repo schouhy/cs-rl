@@ -7,13 +7,13 @@
 using textures_map = std::map<std::string, std::vector<sf::Texture*>>;
 
 
-class PlayerAnimation : public Layer
+class PlayerSpriteLayer : public Layer
 {
 private:
     const Player& m_Player;
     sf::Sprite m_Sprite;
     const sf::Color m_Color; // Borrar?
-    std::map<std::string, std::vector<sf::Texture*>>& m_Textures;
+    textures_map& m_Textures;
     
     sf::Clock m_Clock;
     sf::Time m_TimeSinceLastUpdate;
@@ -27,9 +27,9 @@ private:
 
 public:
     // Constructor / Destructor
-    PlayerAnimation(const Player& player, textures_map& textures);
-    PlayerAnimation(const Player& player, textures_map& textures, sf::Color color);
-    ~PlayerAnimation();
+    PlayerSpriteLayer(const Player& player, textures_map& textures);
+    PlayerSpriteLayer(const Player& player, textures_map& textures, sf::Color color);
+    ~PlayerSpriteLayer();
 
     // Functions
     void update();

@@ -1,7 +1,17 @@
 #ifndef LAYER_H
 #define LAYER_H
 
-#include "Entity.h"
+
+#include <iostream>
+#include <chrono>
+#include <experimental/filesystem>
+#include <stack>
+
+#include <SFML/Graphics.hpp>
+
+#define TIME_PER_FRAME 1.f/60.f
+#define MOUSEPOSITION 200
+
 
 class Layer
 {

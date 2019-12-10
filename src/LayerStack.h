@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include "Layer.h"
 
-class LayerStack
+class LayerStack : public Layer
 {
 protected:
     std::vector<Layer*> m_Layers;
