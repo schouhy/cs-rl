@@ -10,7 +10,6 @@ workspace "cs_rl"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["glm"] = "cs_rl/vendor/glm"
-IncludeDir["SFML"] = "cs_rl/vendor/SFML/include"
 
 project "cs_rl"
     location "cs_rl"
@@ -30,17 +29,10 @@ project "cs_rl"
 		"%{prj.name}/vendor/glm/glm/**.inl",
     }
 
-    defines 
-    { 
-        "SFML_STATIC"
-    }
-
     includedirs
     {
         "%{prj.name}/src",
         "%{IncludeDir.glm}",
-        "%{IncludeDir.SFML}"
-
     }
 
 	links
