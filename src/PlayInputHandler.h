@@ -9,13 +9,13 @@ class PlayInputHandler : public Layer
 {
 private:
     // Variables
-    Environment *m_Environment;
+    Environment& m_Environment;
     sf::Event m_Event;
     
     // Functions
     void processSFMLEvents(ActionInput& action);
 public:
-    PlayInputHandler(sf::RenderWindow& window, Environment *env);
+    PlayInputHandler(sf::RenderWindow& window, Environment& env);
     ~PlayInputHandler() = default;
     
     // Functions

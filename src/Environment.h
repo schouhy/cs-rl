@@ -16,7 +16,7 @@ public:
     ~Environment();
 
     // Accesors
-    const std::vector<Player*> getPlayers();
+    const std::vector<Player*> getPlayers() const;
 
     // Functions
     void step(const std::vector<ActionInput*>& input);

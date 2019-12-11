@@ -26,8 +26,11 @@ void InteractiveGameState::initEnvironment()
 
 void InteractiveGameState::initLayers()
 {
-    m_Layers.push_back(new PlayInputHandler(m_Window, m_Environment));
-    m_Layers.push_back(new VisualizationStack(m_Window, m_Environment));
+    // Input that affects Environment
+    m_Layers.push_back(new PlayInputHandler(m_Window, *m_Environment));
+
+    // Retrieves information from Environment to render it on the screen
+    m_Layers.push_back(new VisualizationStack(m_Window, *m_Environment));
 }
 
 

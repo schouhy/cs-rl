@@ -18,7 +18,7 @@ Environment::~Environment()
 
 // Accesors
 
-const std::vector<Player*> Environment::getPlayers()
+const std::vector<Player*> Environment::getPlayers() const
 {
     return m_Players;
 }

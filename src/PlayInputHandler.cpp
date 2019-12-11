@@ -1,6 +1,6 @@
 #include "PlayInputHandler.h"
 
-PlayInputHandler::PlayInputHandler(sf::RenderWindow& window, Environment *env)
+PlayInputHandler::PlayInputHandler(sf::RenderWindow& window, Environment& env)
     : Layer(window), m_Environment(env)
 {
     m_Window.setMouseCursorVisible(false);
@@ -43,7 +43,7 @@ void PlayInputHandler::update()
     ActionInput dummy_input = {Forward, 0.01f};
     
     const std::vector<ActionInput*> inputs = {&user_input, &dummy_input};
-    m_Environment->step(inputs);
+    m_Environment.step(inputs);
 }
 
 

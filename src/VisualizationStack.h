@@ -10,7 +10,7 @@
 class VisualizationStack : public LayerStack
 {
 private:
-    Environment *m_Environment;
+    const Environment& m_Environment;
     std::map<std::string, std::vector<sf::Texture*>> m_PlayerTextures;
     sf::Texture m_BackgroundTexture;
 
@@ -23,7 +23,7 @@ private:
 
 public:
     // Constructor / Destructor
-    VisualizationStack(sf::RenderWindow& window, Environment *env);
+    VisualizationStack(sf::RenderWindow& window, const Environment& env);
     virtual ~VisualizationStack();
 };
 
