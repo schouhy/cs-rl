@@ -14,15 +14,13 @@ void Runner::initWindow()
     m_Window =  new sf::RenderWindow(sf::VideoMode(1024, 768), "Las tinieblas de sasa");
     m_Window->setFramerateLimit(90);
     m_Window->setVerticalSyncEnabled(true);
-    m_Window->setMouseCursorVisible(SHOW_CURSOR);
 }
 
 
 
 void Runner::initLayerStack()
 {
-//    m_StateStack.push(std::make_unique<InteractiveGameState>(*m_Window));
-    m_StateStack.push(std::make_unique<MapEditorState>(*m_Window));
+    m_StateStack.push(GAMEMODE);
 }
 
 

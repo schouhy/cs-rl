@@ -34,7 +34,7 @@ void VisualizationStack::initTextures()
 void VisualizationStack::initSprites()
 {
     // Background
-    m_Layers.push_back(new BackgroundLayer(m_Window, m_BackgroundTexture));
+    m_Layers.push_back(new MapLayer(m_Window, m_BackgroundTexture));
 
     // Players
     std::vector<sf::Color> colors = {sf::Color(255, 185, 185), sf::Color(128, 255, 128)};

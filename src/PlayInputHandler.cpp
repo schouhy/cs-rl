@@ -3,6 +3,7 @@
 PlayInputHandler::PlayInputHandler(sf::RenderWindow& window, Environment *env)
     : Layer(window), m_Environment(env)
 {
+    m_Window.setMouseCursorVisible(false);
 }
 
 

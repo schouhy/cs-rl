@@ -2,7 +2,7 @@
 #define MAPEDITORSTATE_H
 
 #include "LayerStack.h"
-#include "BackgroundLayer.h"
+#include "MapLayer.h"
 #include "EditInputHandler.h"
 
 

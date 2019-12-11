@@ -3,6 +3,12 @@
 EditInputHandler::EditInputHandler(sf::RenderWindow& window, std::vector<Vertex>& vertices)
     : Layer(window), m_Vertices(vertices)
 {
+    m_Window.setMouseCursorVisible(true);
+}
+
+EditInputHandler::~EditInputHandler()
+{
+
 }
 
 void EditInputHandler::update()
@@ -14,7 +20,7 @@ void EditInputHandler::update()
 
         if(m_Event.type == sf::Event::MouseButtonReleased)
             if(m_Event.mouseButton.button == sf::Mouse::Left)
-                std::cout << "ahora si" << std::endl;
+                m_Vertices.push_back({m_Event.mouseButton.x, m_Event.mouseButton.y});
     }
 }
 

@@ -22,7 +22,7 @@ private:
     void processSFMLEvents(ActionInput& action);
 public:
     EditInputHandler(sf::RenderWindow& window, std::vector<Vertex>& vertices);
-    ~EditInputHandler() = default;
+    ~EditInputHandler();
 
     // Functions
     void update() override;

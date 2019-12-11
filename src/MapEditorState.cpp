@@ -10,15 +10,15 @@ MapEditorState::MapEditorState(sf::RenderWindow& window)
 
 MapEditorState::~MapEditorState()
 {
-    for (auto vertex : m_Vertices)
-        std::cout << vertex.x << " " << vertex.y << std::endl;
+    for (std::size_t i=0; i<m_Vertices.size(); ++i)
+        std::cout << i << ") " << m_Vertices[i].x << ", " << m_Vertices[i].y << std::endl;
 }
 // Functions
 
 
 void MapEditorState::initLayers()
 {
-    m_Layers.push_back(new BackgroundLayer(m_Window, m_BackgroundTexture));
+    m_Layers.push_back(new MapLayer(m_Window, m_BackgroundTexture));
     m_Layers.push_back(new EditInputHandler(m_Window, m_Vertices));
 }
 

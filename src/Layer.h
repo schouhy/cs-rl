@@ -12,12 +12,12 @@
 #define TIME_PER_FRAME 1.f/60.f
 #define MOUSEPOSITION 200
 
-#define MAPEDITOR
+//#define MAPEDITOR
+
 #ifdef MAPEDITOR
-#define SHOW_CURSOR true
-#endif
-#ifdef GAMESTATE
-#define SHOW_CURSOR false
+#define GAMEMODE std::make_unique<MapEditorState>(*m_Window)
+#else
+#define GAMEMODE std::make_unique<InteractiveGameState>(*m_Window)
 #endif
 
 

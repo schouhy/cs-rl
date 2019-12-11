@@ -7,9 +7,9 @@ class Environment
 {
 private:
     bool m_Done;
-    std::vector<Player*> m_Players;
-    //Entity Box;
-    
+
+    // Players
+    std::vector<Player*> m_Players;    
 public:
     //Constructor / Destructor
     Environment();

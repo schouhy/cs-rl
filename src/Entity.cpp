@@ -3,8 +3,8 @@
 
 // Constructor / Destructor
 
-Entity::Entity(float x, float y) 
-    : m_Position({x, y}), m_Height(15.f), m_Width(15.f)
+Entity::Entity(float x, float y, float h, float w) 
+    : m_Position({x, y}), m_Height(h), m_Width(w)
 {
 }
 
@@ -14,6 +14,11 @@ Entity::Entity(float x, float y)
 const glm::vec2 Entity::getPosition() const
 {
     return m_Position;
+}
+
+const glm::vec2 Entity::getTopLeftCorner() const
+{
+    return {m_Position.x - m_Width/2.f, m_Position.y - m_Height/2.f};
 }
 
 const float Entity::getHeight() const

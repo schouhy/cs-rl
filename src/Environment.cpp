@@ -4,12 +4,14 @@
 Environment::Environment() 
 {
     m_Done = false;
+    // Players
     m_Players.push_back(new Player(50.f, 50.f));
     m_Players.push_back(new Player(500.f, 500.f));
 }
 
 Environment::~Environment()
 {
+    // Players
     for (auto player : m_Players)
         delete player;
 }

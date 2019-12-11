@@ -14,11 +14,12 @@ protected:
 
 public:
     // Constructor / Destructor
-    Entity(float x, float y);
+    Entity(float x, float y, float h, float w);
     virtual ~Entity() = default;
 
     // Accesors
     const glm::vec2 getPosition() const;
+    const glm::vec2 getTopLeftCorner() const;
     const float getWidth() const;
     const float getHeight() const;
 };

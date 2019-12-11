@@ -3,7 +3,7 @@
 
 #include "Environment.h"
 #include "PlayerSpriteLayer.h"
-#include "BackgroundLayer.h"
+#include "MapLayer.h"
 #include "LayerStack.h"
 
 
