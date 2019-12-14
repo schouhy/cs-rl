@@ -13,7 +13,7 @@ private:
     
     // Functions
     void movePlayer(Player& player, ActionInput *input);
-
+    void collide();
 public:
     //Constructor / Destructor
     Environment();

@@ -37,9 +37,8 @@ public:
     Player(float x, float y);
     ~Player();
 
-    const Vec2 getPosition() const;
-
     // Accessors
+    const Vec2 getPosition() const;
     const Vec2 getDirection() const;
     const int getMovementState() const;
 };

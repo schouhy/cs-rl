@@ -20,9 +20,9 @@ class Shape
 public:
     Shape();
     virtual ~Shape();
-    virtual const bool collidesWith(const Shape& other_shape) const = 0;
-    virtual const bool collidesWithCircle(const Circle& circle) const = 0;
-    virtual const bool collidesWithSegment(const Segment& segment) const = 0;
+    virtual const float collidesWith(const Shape& other_shape) const = 0;
+    virtual const float collidesWithCircle(const Circle& circle) const = 0;
+    virtual const float collidesWithSegment(const Segment& segment) const = 0;
 };
 
 
@@ -36,9 +36,9 @@ public:
     ~Circle();
     const Vec2 getCenter() const;
     const float getRadius() const;
-    const bool collidesWith(const Shape& other_shape) const override;
-    const bool collidesWithCircle(const Circle& circle) const override;
-    const bool collidesWithSegment(const Segment& segment) const override;
+    const float collidesWith(const Shape& other_shape) const override;
+    const float collidesWithCircle(const Circle& circle) const override;
+    const float collidesWithSegment(const Segment& segment) const override;
 };
 
 
@@ -55,9 +55,9 @@ public:
     //const Vec2 getSource() const;
     //const Vec2 getTarget() const;
     const float distToPoint(const Vec2& v) const;
-    const bool collidesWith(const Shape& other_shape) const override;
-    const bool collidesWithCircle(const Circle& circle) const override;
-    const bool collidesWithSegment(const Segment& segment) const override;
+    const float collidesWith(const Shape& other_shape) const override;
+    const float collidesWithCircle(const Circle& circle) const override;
+    const float collidesWithSegment(const Segment& segment) const override;
 };
 
 

@@ -39,19 +39,19 @@ void Circle::setCenter(Vec2 new_center)
     m_Center = new_center;
 }*/
 
-const bool Circle::collidesWith(const Shape& other_shape) const
+const float Circle::collidesWith(const Shape& other_shape) const
 {
-    other_shape.collidesWithCircle(*this);
+    return other_shape.collidesWithCircle(*this);
 }
 
-const bool Circle::collidesWithCircle(const Circle& circle) const
+const float Circle::collidesWithCircle(const Circle& circle) const
 {
-    glm::distance(getCenter(), circle.getCenter()) < getRadius() + circle.getRadius();
+    return std::max<float>(getRadius() + circle.getRadius() - glm::distance(getCenter(), circle.getCenter()), 0.);
 }
 
-const bool Circle::collidesWithSegment(const Segment& segment) const
+const float Circle::collidesWithSegment(const Segment& segment) const
 {
-    segment.collidesWithCircle(*this);
+    return segment.collidesWithCircle(*this);
 }
 
 
@@ -84,13 +84,15 @@ const float Segment::distToPoint(const Vec2& v) const
 }
 
 
-const bool Segment::collidesWith(const Shape& other_shape) const
+const float Segment::collidesWith(const Shape& other_shape) const
 {
     return other_shape.collidesWithSegment(*this);
 }
 
-const bool Segment::collidesWithCircle(const Circle& circle) const
+const float Segment::collidesWithCircle(const Circle& circle) const
 {
+    // Implementar de vuelta
+    /*
     float proj_segment = glm::dot(circle.getCenter() - m_Source, m_NormalizedDirection);
     float proj_normal = glm::dot(circle.getCenter() - m_Source, m_NormalizedNormal);
 
@@ -102,9 +104,11 @@ const bool Segment::collidesWithCircle(const Circle& circle) const
             return false;
     else
         return false;
+    */
+   return 0.;
 }
 
-const bool Segment::collidesWithSegment(const Segment& segment) const
+const float Segment::collidesWithSegment(const Segment& segment) const
 {
     return true; // Implementar
 }
