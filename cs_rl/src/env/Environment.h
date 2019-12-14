@@ -10,7 +10,9 @@ private:
 
     // Players
     std::vector<Player*> m_Players;
-
+    
+    // Functions
+    void movePlayer(Player& player, ActionInput *input);
 
 public:
     //Constructor / Destructor

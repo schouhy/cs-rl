@@ -37,11 +37,41 @@ const std::vector<Player*> Environment::getPlayers() const
 
 void Environment::step(const std::vector<ActionInput*>& inputs)
 {
-    m_Players.at(0)->performAction(inputs.at(0));
-    m_Players.at(1)->performAction(inputs.at(1));
+    for (std::size_t i=0; i<m_Players.size(); ++i)
+        movePlayer(*m_Players[i], inputs[i]);
+    //m_Players.at(0)->performAction(inputs.at(0));
+    //m_Players.at(1)->performAction(inputs.at(1));
 }
 
 const bool Environment::isDone() const
 {
     return m_Done;
 }
+
+void Environment::movePlayer(Player& player, ActionInput *input)
+{
+    player.m_MovementState = input->pos_action;
+    float walking_factor = (input->pos_action & Walk)? 0.35 : 1;
+
+    if (player.m_MovementState & StrafeLeft) 
+    {
+        player.m_Position.x += player.m_Direction.y * 0.5f * walking_factor;
+        player.m_Position.y += -player.m_Direction.x * 0.5f * walking_factor;
+    }
+
+    if (player.m_MovementState & StrafeRight)
+    {
+        player.m_Position.x += -player.m_Direction.y * 0.5f * walking_factor;
+        player.m_Position.y += player.m_Direction.x * 0.5f * walking_factor;
+    }
+
+    if (player.m_MovementState & Forward)
+        player.m_Position += player.m_Direction * walking_factor;
+
+    if (player.m_MovementState & Backward)
+        player.m_Position -= player.m_Direction * 0.5f * walking_factor;
+    player.m_Direction = glm::rotate(player.m_Direction, input->angle_action);
+
+    static_cast<Circle*>(player.m_Shape)->setCenter(player.m_Position);
+}
+    

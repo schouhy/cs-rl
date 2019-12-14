@@ -25,6 +25,7 @@ struct ActionInput
 
 class Player : public Entity
 {
+friend class Environment;
 private:
     Vec2 m_Direction;
     int m_MovementState;
@@ -41,9 +42,6 @@ public:
     // Accessors
     const Vec2 getDirection() const;
     const int getMovementState() const;
-
-    // Functions
-    void performAction(ActionInput *input);
 };
 
 #endif // PLAYER_H
