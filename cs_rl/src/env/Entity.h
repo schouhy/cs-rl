@@ -1,25 +1,23 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-
-#include <glm/glm.hpp>
-#include <glm/gtx/vector_angle.hpp>
-#include <vector>
+#include "ShapeManager.h"
 
 class Entity
 {
 protected:
-    glm::vec2 m_Position;
- //   const CollisionShape m_CollisionShape;
+    Vec2 m_Position;
+    Shape *m_Shape;
 
 public:
     // Constructor / Destructor
-    Entity(float x, float y);//, const CollisionShape collision_shape);
+    Entity(float x, float y);
     virtual ~Entity() = default;
 
     // Accesors
-    const glm::vec2 getPosition() const;
-    //virtual const bool checkCollision(const Entity& entity) = 0;
+    virtual const glm::vec2 getPosition() const = 0;
+    const Shape* getShape() const;
+   // virtual const Shape& getShape() const = 0;
 };
 
 #endif

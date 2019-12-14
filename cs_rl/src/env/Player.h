@@ -26,15 +26,20 @@ struct ActionInput
 class Player : public Entity
 {
 private:
-    glm::vec2 m_Direction;
+    Vec2 m_Direction;
     int m_MovementState;
+
+    // Initializers
+    void initShape();
 public:
     // Constructor / Destructor
     Player(float x, float y);
-    ~Player() = default;
+    ~Player();
+
+    const Vec2 getPosition() const;
 
     // Accessors
-    const glm::vec2 getDirection() const;
+    const Vec2 getDirection() const;
     const int getMovementState() const;
 
     // Functions

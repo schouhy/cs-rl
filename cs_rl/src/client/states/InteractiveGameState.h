@@ -7,6 +7,7 @@
 #include "client/layers/VisualizationStack.h"
 #include "client/layers/PlayInputHandler.h"
 
+
 class InteractiveGameState : public LayerStack
 {
 private:

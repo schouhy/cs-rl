@@ -5,8 +5,26 @@
 Player::Player(float x, float y) 
     : Entity(x, y), m_Direction({1.3f, 0.f}), m_MovementState(0)
 {
+    initShape();
 }
 
+Player::~Player()
+{
+    delete m_Shape;
+}
+
+const Vec2 Player::getPosition() const
+{
+    return m_Position;
+}
+
+// Initializers
+
+void Player::initShape()
+{
+    m_Shape = new Circle(m_Position, 10.f);
+   // m_Shape = static_cast<Circle*>(m_Shape);
+}
 
 // Accessors
 
@@ -45,5 +63,8 @@ void Player::performAction(ActionInput *input)
     if (m_MovementState & Backward)
         m_Position -= m_Direction * 0.5f * walking_factor;
     m_Direction = glm::rotate(m_Direction, input->angle_action);
+
+    
+    static_cast<Circle*>(m_Shape)->setCenter(m_Position);
 }
  

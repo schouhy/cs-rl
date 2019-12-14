@@ -28,6 +28,14 @@ void PlayerSpriteLayer::checkReset()
 
 void PlayerSpriteLayer::transform()
 {
+    ////////   Debug ///////////
+    m_CollidingArea.setFillColor(sf::Color::Red);
+    m_CollidingArea.setPointCount(30);
+    m_CollidingArea.setRadius(10.f);
+    m_CollidingArea.setOrigin(10.f, 10.f);
+    m_CollidingArea.setPosition(m_Player.getPosition().x, m_Player.getPosition().y);
+    ////////////////////////////
+
     m_Sprite.setOrigin(95.f, 120.f);
     m_Sprite.setColor(m_Color);
     m_Sprite.setPosition(m_Player.getPosition().x, m_Player.getPosition().y);
@@ -64,5 +72,6 @@ void PlayerSpriteLayer::update()
 
 void PlayerSpriteLayer::render()
 {
+    m_Window.draw(m_CollidingArea);
     m_Window.draw(m_Sprite);
 }

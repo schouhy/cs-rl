@@ -9,7 +9,9 @@ private:
     bool m_Done;
 
     // Players
-    std::vector<Player*> m_Players;    
+    std::vector<Player*> m_Players;
+
+
 public:
     //Constructor / Destructor
     Environment();

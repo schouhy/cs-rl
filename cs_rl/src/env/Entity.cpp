@@ -3,15 +3,12 @@
 
 // Constructor / Destructor
 
-Entity::Entity(float x, float y)//, const CollisionShape collision_shape) 
-    : m_Position({x, y}) //, m_CollisionShape(collision_shape)
+Entity::Entity(float x, float y)
+    : m_Position({x, y})
 {
 }
 
-
-// Accesors
-
-const glm::vec2 Entity::getPosition() const
+const Shape* Entity::getShape() const
 {
-    return m_Position;
+    return m_Shape;
 }

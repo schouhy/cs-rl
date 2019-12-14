@@ -19,6 +19,9 @@ private:
     sf::Time m_TimeSinceLastUpdate;
     int m_LastState;
     int m_CurrentIndex;
+
+    //Debug
+    sf::CircleShape m_CollidingArea;
     
     // Functions
     void checkReset();
