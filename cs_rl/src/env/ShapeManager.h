@@ -29,18 +29,16 @@ public:
 class Circle : public Shape
 {
 private:
-    Vec2 m_Center;
+    Vec2& m_Center;
     float m_Radius;
 public:
-    Circle(Vec2 center, float radius);
+    Circle(Vec2& center, float radius);
     ~Circle();
     const Vec2 getCenter() const;
     const float getRadius() const;
     const bool collidesWith(const Shape& other_shape) const override;
     const bool collidesWithCircle(const Circle& circle) const override;
     const bool collidesWithSegment(const Segment& segment) const override;
-
-    void setCenter(Vec2 new_center);
 };
 
 

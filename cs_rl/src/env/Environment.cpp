@@ -39,8 +39,6 @@ void Environment::step(const std::vector<ActionInput*>& inputs)
 {
     for (std::size_t i=0; i<m_Players.size(); ++i)
         movePlayer(*m_Players[i], inputs[i]);
-    //m_Players.at(0)->performAction(inputs.at(0));
-    //m_Players.at(1)->performAction(inputs.at(1));
 }
 
 const bool Environment::isDone() const
@@ -71,7 +69,5 @@ void Environment::movePlayer(Player& player, ActionInput *input)
     if (player.m_MovementState & Backward)
         player.m_Position -= player.m_Direction * 0.5f * walking_factor;
     player.m_Direction = glm::rotate(player.m_Direction, input->angle_action);
-
-    static_cast<Circle*>(player.m_Shape)->setCenter(player.m_Position);
 }
     

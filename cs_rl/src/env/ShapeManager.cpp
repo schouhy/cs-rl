@@ -15,7 +15,7 @@ Shape::~Shape()
 
 // Circle
 
-Circle::Circle(Vec2 center, float radius) : m_Radius(radius), m_Center(center) 
+Circle::Circle(Vec2& center, float radius) : m_Radius(radius), m_Center(center) 
 {
 }
 
@@ -33,10 +33,11 @@ const float Circle::getRadius() const
     return m_Radius;
 }
 
+/*
 void Circle::setCenter(Vec2 new_center)
 {
     m_Center = new_center;
-}
+}*/
 
 const bool Circle::collidesWith(const Shape& other_shape) const
 {

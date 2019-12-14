@@ -29,7 +29,7 @@ friend class Environment;
 private:
     Vec2 m_Direction;
     int m_MovementState;
-
+ 
     // Initializers
     void initShape();
 public:
