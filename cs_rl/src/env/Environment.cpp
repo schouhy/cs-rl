@@ -44,8 +44,9 @@ void Environment::collide()
                 std::cout << intersection << std::endl;
                 if (intersection > 0.)
                 {
-                    m_Players[i]->m_Position -= 0.5f*intersection*(m_Players[i]->m_Direction);
-                    m_Players[j]->m_Position -= 0.5f*intersection*(m_Players[j]->m_Direction);
+                    Vec2 collision_direction = m_Players[j]->getPosition() - m_Players[i]->getPosition();
+                    m_Players[j]->m_Position += 0.1f*intersection*collision_direction;
+                    m_Players[i]->m_Position -= 0.1f*intersection*collision_direction;
                 }
             }
 }
