@@ -39,19 +39,19 @@ void Circle::setCenter(Vec2 new_center)
     m_Center = new_center;
 }*/
 
-const float Circle::collidesWith(const Shape& other_shape) const
+const float Circle::distanceTo(const Shape& other_shape) const
 {
-    return other_shape.collidesWithCircle(*this);
+    return other_shape.distanceToCircle(*this);
 }
 
-const float Circle::collidesWithCircle(const Circle& circle) const
+const float Circle::distanceToCircle(const Circle& circle) const
 {
-    return std::max<float>(getRadius() + circle.getRadius() - glm::distance(getCenter(), circle.getCenter()), 0.);
+    return glm::distance(getCenter(), circle.getCenter()) - getRadius() - circle.getRadius();
 }
 
-const float Circle::collidesWithSegment(const Segment& segment) const
+const float Circle::distanceToSegment(const Segment& segment) const
 {
-    return segment.collidesWithCircle(*this);
+    return segment.distanceToCircle(*this);
 }
 
 
@@ -84,31 +84,19 @@ const float Segment::distToPoint(const Vec2& v) const
 }
 
 
-const float Segment::collidesWith(const Shape& other_shape) const
+const float Segment::distanceTo(const Shape& other_shape) const
 {
-    return other_shape.collidesWithSegment(*this);
+    return other_shape.distanceToSegment(*this);
 }
 
-const float Segment::collidesWithCircle(const Circle& circle) const
+const float Segment::distanceToCircle(const Circle& circle) const
 {
-    // Implementar de vuelta
-    /*
     float proj_segment = glm::dot(circle.getCenter() - m_Source, m_NormalizedDirection);
-    float proj_normal = glm::dot(circle.getCenter() - m_Source, m_NormalizedNormal);
-
-    //std::cout << proj_segment << " " << proj_normal << std::endl;
-    if((proj_segment > -circle.getRadius()) && (m_Length + circle.getRadius() > proj_segment))
-        if((proj_normal < circle.getRadius()) && (proj_normal > -circle.getRadius()))
-            return true;
-        else
-            return false;
-    else
-        return false;
-    */
-   return 0.;
+    //float proj_normal = glm::dot(circle.getCenter() - m_Source, m_NormalizedNormal);
+    return glm::distance(circle.getCenter(), std::min<float>(m_Length, std::max<float>(0.f, proj_segment))*m_NormalizedDirection + m_Source) - circle.getRadius();
 }
 
-const float Segment::collidesWithSegment(const Segment& segment) const
+const float Segment::distanceToSegment(const Segment& segment) const
 {
     return true; // Implementar
 }

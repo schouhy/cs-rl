@@ -10,6 +10,13 @@ private:
 
     // Players
     std::vector<Player*> m_Players;
+
+    // Walls
+    std::vector<Segment*> m_Walls;
+
+    // Initializers
+    void initPlayers();
+    void initWalls();
     
     // Functions
     void movePlayer(Player& player, ActionInput *input);

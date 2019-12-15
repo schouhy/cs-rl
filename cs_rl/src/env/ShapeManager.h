@@ -20,9 +20,9 @@ class Shape
 public:
     Shape();
     virtual ~Shape();
-    virtual const float collidesWith(const Shape& other_shape) const = 0;
-    virtual const float collidesWithCircle(const Circle& circle) const = 0;
-    virtual const float collidesWithSegment(const Segment& segment) const = 0;
+    virtual const float distanceTo(const Shape& other_shape) const = 0;
+    virtual const float distanceToCircle(const Circle& circle) const = 0;
+    virtual const float distanceToSegment(const Segment& segment) const = 0;
 };
 
 
@@ -36,14 +36,15 @@ public:
     ~Circle();
     const Vec2 getCenter() const;
     const float getRadius() const;
-    const float collidesWith(const Shape& other_shape) const override;
-    const float collidesWithCircle(const Circle& circle) const override;
-    const float collidesWithSegment(const Segment& segment) const override;
+    const float distanceTo(const Shape& other_shape) const override;
+    const float distanceToCircle(const Circle& circle) const override;
+    const float distanceToSegment(const Segment& segment) const override;
 };
 
 
 class Segment : public Shape
 {
+friend class Environment;
 private:
     Vec2 m_Source, m_Target;
     float m_Length;
@@ -55,9 +56,9 @@ public:
     //const Vec2 getSource() const;
     //const Vec2 getTarget() const;
     const float distToPoint(const Vec2& v) const;
-    const float collidesWith(const Shape& other_shape) const override;
-    const float collidesWithCircle(const Circle& circle) const override;
-    const float collidesWithSegment(const Segment& segment) const override;
+    const float distanceTo(const Shape& other_shape) const override;
+    const float distanceToCircle(const Circle& circle) const override;
+    const float distanceToSegment(const Segment& segment) const override;
 };
 
 

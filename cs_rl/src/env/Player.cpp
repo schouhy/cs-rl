@@ -22,7 +22,7 @@ const Vec2 Player::getPosition() const
 
 void Player::initShape()
 {
-    m_Shape = new Circle(m_Position, 10.f);
+    m_Shape = new Circle(m_Position, 8.f);
    // m_Shape = static_cast<Circle*>(m_Shape);
 }
 

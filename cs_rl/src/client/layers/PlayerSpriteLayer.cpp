@@ -31,8 +31,8 @@ void PlayerSpriteLayer::transform()
     ////////   Debug ///////////
     m_CollidingArea.setFillColor(sf::Color::Red);
     m_CollidingArea.setPointCount(30);
-    m_CollidingArea.setRadius(10.f);
-    m_CollidingArea.setOrigin(10.f, 10.f);
+    m_CollidingArea.setRadius(8.f);
+    m_CollidingArea.setOrigin(8.f, 8.f);
     m_CollidingArea.setPosition(m_Player.getPosition().x, m_Player.getPosition().y);
     ////////////////////////////
 
