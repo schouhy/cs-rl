@@ -40,7 +40,7 @@ void PlayInputHandler::update()
     processSFMLEvents(user_input);
 
     // TO-DO: Las acciones de los bots tienen que estar manejadas por otra capa distinta
-    ActionInput dummy_input = {Action::Forward, 0.03f};
+    ActionInput dummy_input = {Action::Forward, 0.1f};
     
     const std::vector<ActionInput*> inputs = {&user_input, &dummy_input};
     m_Environment.step(inputs);

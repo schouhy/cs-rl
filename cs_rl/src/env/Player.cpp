@@ -3,7 +3,7 @@
 //Constructor / Destructor
 
 Player::Player(float x, float y) 
-    : Entity(x, y), m_lookDirection({1.f, 0.f}), m_movDirection({0.f, 0.f}), m_MovementState(0)
+    : Entity(x, y), m_lookDirection({1.f, 0.f}), m_Velocity({0.f, 0.f}), m_MovementState(0)
 {
     initShape();
 }
@@ -22,7 +22,7 @@ const Vec2 Player::getPosition() const
 
 void Player::initShape()
 {
-    m_Shape = new Circle(m_Position, 8.f);
+    m_Shape = new Circle(m_Position, 5.f);
    // m_Shape = static_cast<Circle*>(m_Shape);
 }
 
