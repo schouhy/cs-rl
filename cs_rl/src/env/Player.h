@@ -27,7 +27,6 @@ class Player : public Entity
 {
 friend class Environment;
 private:
-    Vec2 m_BoundingCirclePosition;
     Vec2 m_lookDirection;
     int m_MovementState;
  
@@ -36,6 +35,8 @@ private:
 
     // Functions
     void move(ActionInput *input);
+    void move(Vec2& delta);
+    const float distanceTo(Shape& shape) const;
 public:
     // Constructor / Destructor
     Player(float x, float y);

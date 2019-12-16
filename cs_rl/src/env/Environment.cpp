@@ -134,9 +134,12 @@ void Environment::collide()
             const float distance = m_Players[i]->getShape()->distanceTo(*m_Players[j]->getShape());
             if (distance < 0.)
             {
-                Vec2 collision_direction = m_Players[j]->m_Position - m_Players[i]->m_Position;
-                m_Players[j]->m_Position -= 0.1f*distance*collision_direction;
-                m_Players[i]->m_Position += 0.1f*distance*collision_direction;
+                Vec2 delta = m_Players[j]->getPosition() - m_Players[i]->getPosition();
+                delta = 0.1f*distance*delta;
+                m_Players[i]->move(delta);
+                // TO-DO: Ver por qué hay que hacer esto y no se puede directamente hacer `Player[j]->move(-1.f*delta);`
+                delta = -1.f*delta; 
+                m_Players[j]->move(delta);
             }
         }
 
@@ -146,8 +149,10 @@ void Environment::collide()
             float wall_distance = m_Players[i]->getShape()->distanceTo(*m_Walls[j]);
             if (wall_distance < 0.f)
             {
-                const Vec2& bounce_dir = m_Walls[j]->m_NormalizedNormal;
-                m_Players[i]->m_Position -= wall_distance*bounce_dir;
+                Vec2 delta = m_Walls[j]->m_Normal;
+                // TO-DO: Ver por qué hay que hacer esto y no se puede directamente hacer `Player[i]->move(-1.f*wall_distance* m_Walls[j]->m_Normal);`
+                delta = -1.f*wall_distance*delta; 
+                m_Players[i]->move(delta);
             }
         }
     }

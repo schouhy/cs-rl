@@ -6,7 +6,6 @@ Player::Player(float x, float y)
     : Entity(x, y), m_lookDirection({1.f, 0.f}), m_MovementState(0)
 {
     initShape();
-    m_BoundingCirclePosition = m_Position + m_lookDirection*0.1f;
 }
 
 Player::~Player()
@@ -48,6 +47,17 @@ void Player::move(ActionInput *input)
     if (m_MovementState & Backward)
         m_Position -= m_lookDirection * 0.5f * walking_factor;
 }
+
+void Player::move(Vec2& delta)
+{
+    m_Position += delta;
+}
+
+const float Player::distanceTo(Shape& shape) const
+{
+    return m_Shape->distanceTo(shape);
+}
+
 
 
 // Initializers
