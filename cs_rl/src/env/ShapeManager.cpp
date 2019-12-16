@@ -91,9 +91,16 @@ const float Segment::distanceTo(const Shape& other_shape) const
 
 const float Segment::distanceToCircle(const Circle& circle) const
 {
-    float proj_segment = glm::dot(circle.getCenter() - m_Source, m_NormalizedDirection);
-    //float proj_normal = glm::dot(circle.getCenter() - m_Source, m_NormalizedNormal);
-    return glm::distance(circle.getCenter(), std::min<float>(m_Length, std::max<float>(0.f, proj_segment))*m_NormalizedDirection + m_Source) - circle.getRadius();
+    float proj_normal_coeff = glm::dot(circle.getCenter() - m_Source, m_NormalizedNormal);
+    if(proj_normal_coeff < 0.)
+        return 10.f;
+    else
+    {
+        float seg_dir_coeff = glm::dot(circle.getCenter() - m_Source, m_NormalizedDirection);
+        seg_dir_coeff = std::min<float>(m_Length, std::max<float>(0.f, seg_dir_coeff));
+        Vec2 proj_seg_dir = seg_dir_coeff*m_NormalizedDirection + m_Source;
+        return glm::distance(circle.getCenter(), proj_seg_dir) - circle.getRadius();
+    }
 }
 
 const float Segment::distanceToSegment(const Segment& segment) const

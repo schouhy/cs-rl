@@ -3,7 +3,7 @@
 //Constructor / Destructor
 
 Player::Player(float x, float y) 
-    : Entity(x, y), m_Direction({1.f, 0.f}), m_MovementState(0)
+    : Entity(x, y), m_lookDirection({1.f, 0.f}), m_movDirection({0.f, 0.f}), m_MovementState(0)
 {
     initShape();
 }
@@ -30,7 +30,7 @@ void Player::initShape()
 
 const glm::vec2 Player::getDirection() const
 {
-    return m_Direction;
+    return m_lookDirection;
 }
 
 const int Player::getMovementState() const

@@ -27,7 +27,8 @@ class Player : public Entity
 {
 friend class Environment;
 private:
-    Vec2 m_Direction;
+    Vec2 m_lookDirection;
+    Vec2 m_movDirection;
     int m_MovementState;
  
     // Initializers
