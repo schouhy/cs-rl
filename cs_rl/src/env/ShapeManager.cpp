@@ -60,8 +60,8 @@ const float Circle::distanceToSegment(const Segment& segment) const
 Segment::Segment(Vec2 source, Vec2 target) : m_Source(source), m_Target(target) 
 {
     m_Length = glm::distance(m_Source, m_Target);
-    m_NormalizedDirection = glm::normalize(m_Target - m_Source);
-    m_NormalizedNormal = orthogonal(m_NormalizedDirection);
+    m_Direction = glm::normalize(m_Target - m_Source);
+    m_Normal = orthogonal(m_Direction);
 }
 
 Segment::~Segment()
@@ -78,10 +78,6 @@ const Vec2 Segment::getTarget() const
     return m_Target;
 }
 */
-const float Segment::distToPoint(const Vec2& v) const
-{
-    return glm::dot(v-m_Source, glm::normalize(orthogonal(m_Target - m_Source)));
-}
 
 
 const float Segment::distanceTo(const Shape& other_shape) const
@@ -91,14 +87,14 @@ const float Segment::distanceTo(const Shape& other_shape) const
 
 const float Segment::distanceToCircle(const Circle& circle) const
 {
-    float proj_normal_coeff = glm::dot(circle.getCenter() - m_Source, m_NormalizedNormal);
+    float proj_normal_coeff = glm::dot(circle.getCenter() - m_Source, m_Normal);
     if(proj_normal_coeff < 0.)
         return 10.f;
     else
     {
-        float seg_dir_coeff = glm::dot(circle.getCenter() - m_Source, m_NormalizedDirection);
+        float seg_dir_coeff = glm::dot(circle.getCenter() - m_Source, m_Direction);
         seg_dir_coeff = std::min<float>(m_Length, std::max<float>(0.f, seg_dir_coeff));
-        Vec2 proj_seg_dir = seg_dir_coeff*m_NormalizedDirection + m_Source;
+        Vec2 proj_seg_dir = seg_dir_coeff*m_Direction + m_Source;
         return glm::distance(circle.getCenter(), proj_seg_dir) - circle.getRadius();
     }
 }
@@ -107,3 +103,7 @@ const float Segment::distanceToSegment(const Segment& segment) const
 {
     return true; // Implementar
 }
+
+
+// Ray
+
