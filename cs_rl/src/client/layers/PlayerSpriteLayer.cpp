@@ -35,11 +35,10 @@ void PlayerSpriteLayer::transform()
     m_CollidingArea.setOrigin(5.f, 5.f);
     m_CollidingArea.setPosition(m_Player.getPosition().x, m_Player.getPosition().y);
     ////////////////////////////
-
     m_Sprite.setOrigin(95.f, 120.f);
     m_Sprite.setColor(m_Color);
     m_Sprite.setPosition(m_Player.getPosition().x, m_Player.getPosition().y);
-    m_Sprite.setScale(sf::Vector2f(0.1f, 0.1f));
+    m_Sprite.setScale(sf::Vector2f(0.08f, 0.08f));
     m_Sprite.setRotation(glm::orientedAngle(glm::vec2(1.f,0.f), glm::normalize(m_Player.getDirection()))*180.f/3.14159f);
 }
 
@@ -71,7 +70,7 @@ void PlayerSpriteLayer::update()
 }
 
 void PlayerSpriteLayer::render()
-{
-    m_Window.draw(m_CollidingArea);
+{    
     m_Window.draw(m_Sprite);
+    //m_Window.draw(m_CollidingArea);
 }

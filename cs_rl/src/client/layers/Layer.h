@@ -12,6 +12,7 @@
 #define TIME_PER_FRAME 1.f/60.f
 #define MOUSEPOSITION 200
   
+
 //#define MAPEDITOR
 
 #ifdef MAPEDITOR

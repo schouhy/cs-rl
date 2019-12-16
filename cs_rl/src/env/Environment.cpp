@@ -14,9 +14,8 @@ Environment::~Environment()
     for (auto player : m_Players)
         delete player;
 
-    // CollisionBoxTest
-    //for (auto segment : m_CollisionBoxTest)
-    //    delete segment;
+    for (auto wall : m_Walls)
+        delete wall;
 }
 
 // Initializers
@@ -28,19 +27,9 @@ void Environment::initPlayers()
 }
 
 void Environment::initWalls()
-/*
-    m_Walls.push_back(new Segment({527.f, 344.f}, {668.f, 344.f}));
-    m_Walls.push_back(new Segment({668.f, 344.f}, {668.f, 215.f}));
-    m_Walls.push_back(new Segment({668.f, 215.f}, {527.f, 215.f}));
-    m_Walls.push_back(new Segment({527.f, 215.f}, {527.f, 344.f}));
-*/
-
 {
-   /* std::vector<Vec2> corners({{527.f, 344.f}, 
-                              {668.f, 344.f}, 
-                              {668.f, 215.f}, 
-                              {527.f, 215.f}});
-    */
+   std::vector<std::vector<Vec2>> walls;
+   
    std::vector<Vec2> corners(
     {{366, 605},
     {412, 605},
@@ -117,10 +106,13 @@ void Environment::initWalls()
     {366, 605}});
 
     std::reverse(corners.begin(), corners.end());
-    for (std::size_t i=0; i<corners.size(); ++i)
-    {
-        m_Walls.push_back(new Segment(corners[i], corners[(i+1)%corners.size()]));
-    }
+    walls.push_back(corners);
+    walls.push_back({{552, 345},{575, 345},{575, 322}, {552, 322}});
+    walls.push_back({{421, 232}, {421, 206}, {390, 206}, {390, 232}});
+    walls.push_back({{589, 274}, {600, 249}, {574, 237}, {564, 262}});
+    for (auto wall : walls)
+        for (std::size_t i=0; i<wall.size(); ++i)
+            m_Walls.push_back(new Segment(wall[i], wall[(i+1)%wall.size()]));
 }
 // Accesors
 
@@ -133,6 +125,7 @@ const std::vector<Player*> Environment::getPlayers() const
 
 void Environment::collide()
 {
+
     for(std::size_t i=0; i<m_Players.size(); ++i)
     {
         // Collision with other players
@@ -146,59 +139,28 @@ void Environment::collide()
                 m_Players[i]->m_Position += 0.1f*distance*collision_direction;
             }
         }
+
         // Collision with walls
-            for(std::size_t j=0; j<m_Walls.size(); ++j)
+        for(std::size_t j=0; j<m_Walls.size(); ++j)
+        {
+            float wall_distance = m_Players[i]->getShape()->distanceTo(*m_Walls[j]);
+            if (wall_distance < 0.f)
             {
-                float wall_distance = m_Players[i]->getShape()->distanceTo(*m_Walls[j]);
-                if (wall_distance < 0.f)
-                {
-                    const Vec2& bounce_dir = m_Walls[j]->m_NormalizedNormal;
-                    m_Players[i]->m_Position -= wall_distance*bounce_dir;
-                }
+                const Vec2& bounce_dir = m_Walls[j]->m_NormalizedNormal;
+                m_Players[i]->m_Position -= wall_distance*bounce_dir;
             }
+        }
     }
 }
 
 void Environment::step(const std::vector<ActionInput*>& inputs)
 {
     for (std::size_t i=0; i<m_Players.size(); ++i)
-        movePlayer(*m_Players[i], inputs[i]);
+        m_Players[i]->move(inputs[i]);
     collide();
 }
 
 const bool Environment::isDone() const
 {
     return m_Done;
-}
-
-void Environment::movePlayer(Player& player, ActionInput *input)
-{
-    // m_MovementState
-    player.m_MovementState = input->pos_action;
-
-    // m_Direction
-    player.m_lookDirection = glm::rotate(player.m_lookDirection, input->angle_action);
-
-    // m_Position
-    player.m_Velocity = player.m_Position;
-    float walking_factor = (input->pos_action & Walk)? 0.45 : 1.3;
-    if (player.m_MovementState & StrafeLeft) 
-    {
-        player.m_Position.x += player.m_lookDirection.y * 0.5f * walking_factor;
-        player.m_Position.y += -player.m_lookDirection.x * 0.5f * walking_factor;
-    }
-
-    if (player.m_MovementState & StrafeRight)
-    {
-        player.m_Position.x += -player.m_lookDirection.y * 0.5f * walking_factor;
-        player.m_Position.y += player.m_lookDirection.x * 0.5f * walking_factor;
-    }
-
-    if (player.m_MovementState & Forward)
-        player.m_Position += player.m_lookDirection * walking_factor;
-
-    if (player.m_MovementState & Backward)
-        player.m_Position -= player.m_lookDirection * 0.5f * walking_factor;
-    player.m_Velocity = player.m_Position - player.m_Velocity;
-}
-    
+}    

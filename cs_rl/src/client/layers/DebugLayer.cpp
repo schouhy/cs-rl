@@ -15,6 +15,4 @@ void DebugLayer::update()
 
 void DebugLayer::render()
 {
-    //for (auto segment : m_Environment.m_CollisionBoxTest)
-    //   std::cout << m_Environment.getPlayers().at(0)->getShape()->collidesWith(*segment) << std::endl;
 }

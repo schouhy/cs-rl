@@ -3,9 +3,10 @@
 //Constructor / Destructor
 
 Player::Player(float x, float y) 
-    : Entity(x, y), m_lookDirection({1.f, 0.f}), m_Velocity({0.f, 0.f}), m_MovementState(0)
+    : Entity(x, y), m_lookDirection({1.f, 0.f}), m_MovementState(0)
 {
     initShape();
+    m_BoundingCirclePosition = m_Position + m_lookDirection*0.1f;
 }
 
 Player::~Player()
@@ -13,20 +14,55 @@ Player::~Player()
     delete m_Shape;
 }
 
-const Vec2 Player::getPosition() const
+// Functions
+
+void Player::move(ActionInput *input)
 {
-    return m_Position;
+
+    // m_MovementState
+    m_MovementState = input->pos_action;
+
+    // m_Direction
+    m_lookDirection = glm::rotate(m_lookDirection, input->angle_action);
+
+    // m_Position
+    float walking_factor = (input->pos_action & Walk)? 0.45 : 1.15;
+    //TO-DO: corregir el hecho de que corriendo en diagonal con strafe va más rápido porque se suman las direcciones.
+    if (m_MovementState & StrafeLeft) 
+    {
+        //m_Position += Vec2({m_lookDirection.y, -m_lookDirection.x})* 0.5f * walking_factor;
+        m_Position.x += m_lookDirection.y * 0.5f * walking_factor;
+        m_Position.y += -m_lookDirection.x * 0.5f * walking_factor;
+    }
+
+    if (m_MovementState & StrafeRight)
+    {
+        //m_Position += Vec2({-m_lookDirection.y, m_lookDirection.x})* 0.5f * walking_factor;
+        m_Position.x += -m_lookDirection.y * 0.5f * walking_factor;
+        m_Position.y += m_lookDirection.x * 0.5f * walking_factor;
+    }
+
+    if (m_MovementState & Forward)
+        m_Position += m_lookDirection * walking_factor;
+
+    if (m_MovementState & Backward)
+        m_Position -= m_lookDirection * 0.5f * walking_factor;
 }
+
 
 // Initializers
 
 void Player::initShape()
 {
-    m_Shape = new Circle(m_Position, 5.f);
-   // m_Shape = static_cast<Circle*>(m_Shape);
+    m_Shape = new Circle(m_Position, 6.f);
 }
 
 // Accessors
+
+const Vec2 Player::getPosition() const
+{
+    return m_Position;
+}
 
 const glm::vec2 Player::getDirection() const
 {
