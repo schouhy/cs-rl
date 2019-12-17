@@ -8,6 +8,7 @@ Entity::Entity(float x, float y)
 {
 }
 
+
 const Shape* Entity::getShape() const
 {
     return m_Shape;

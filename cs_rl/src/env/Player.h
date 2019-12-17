@@ -36,7 +36,6 @@ private:
     // Functions
     void move(ActionInput *input);
     void move(Vec2& delta);
-    const float distanceTo(Shape& shape) const;
 public:
     // Constructor / Destructor
     Player(float x, float y);

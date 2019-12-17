@@ -53,11 +53,6 @@ void Player::move(Vec2& delta)
     m_Position += delta;
 }
 
-const float Player::distanceTo(Shape& shape) const
-{
-    return m_Shape->distanceTo(shape);
-}
-
 
 
 // Initializers

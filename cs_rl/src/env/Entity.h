@@ -17,7 +17,6 @@ public:
     // Accesors
     virtual const glm::vec2 getPosition() const = 0;
     const Shape* getShape() const;
-   // virtual const Shape& getShape() const = 0;
 };
 
 #endif

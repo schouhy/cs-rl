@@ -19,8 +19,9 @@ private:
     void initWalls();
     
     // Functions
-    void movePlayer(Player& player, ActionInput *input);
+    void move(const std::vector<ActionInput*>& inputs);
     void collide();
+    void shoot(const std::vector<ActionInput*>& inputs);
 public:
     //Constructor / Destructor
     Environment();
