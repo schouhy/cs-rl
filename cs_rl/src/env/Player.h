@@ -2,6 +2,8 @@
 #define PLAYER_H
 
 #include "Entity.h"
+#include "Weapon.h"
+
 
 #define BIT(x) (1 << x)
 
@@ -30,7 +32,8 @@ private:
     Vec2 m_lookDirection;
     int m_MovementState;
     float m_Health;
- 
+    Rifle m_Weapon;
+    
     // Initializers
     void initShape();
 

@@ -170,15 +170,17 @@ void Environment::combat(const std::vector<ActionInput*>& inputs)
 {
     for (std::size_t i=0; i<m_Players.size(); ++i)
     {
-        if (inputs[i]->pos_action & Action::Shoot /* && m_Players[i]->isWeaponReady()*/)
+        if (inputs[i]->pos_action & Action::Shoot && m_Players[i]->m_Weapon.isReady())
             fire(m_Players[i]);
-        //m_Players[i]->updateWeapon();
+        else
+            m_Players[i]->m_Weapon.update();
     }
 
 }
 
 void Environment::fire(Player* player)
 {
+    player->m_Weapon.fire();
     Ray shot(player->getPosition(), player->getDirection());
     
     // Walls
