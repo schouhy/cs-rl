@@ -6,13 +6,19 @@
 PlayerSpriteLayer::PlayerSpriteLayer(sf::RenderWindow& window, const Player& player, textures_map& textures)
     : Layer(window), m_Player(player), m_Textures(textures), m_LastState(0), m_CurrentIndex(0), m_Color(sf::Color::White)
 {
+    m_Aim = new sf::VertexArray(sf::Lines, 2);
 }
 
 PlayerSpriteLayer::PlayerSpriteLayer(sf::RenderWindow& window,const Player& player, textures_map& textures, sf::Color color)
     :  Layer(window), m_Player(player), m_Textures(textures), m_LastState(0), m_CurrentIndex(0), m_Color(color)
 {
+    m_Aim = new sf::VertexArray(sf::Lines, 2);
 }
 
+PlayerSpriteLayer::~PlayerSpriteLayer()
+{
+    delete m_Aim;
+}
 
 // Functions
 
@@ -34,6 +40,13 @@ void PlayerSpriteLayer::transform()
     m_CollidingArea.setRadius(5.f);
     m_CollidingArea.setOrigin(5.f, 5.f);
     m_CollidingArea.setPosition(m_Player.getPosition().x, m_Player.getPosition().y);
+
+    (*m_Aim)[0].position = sf::Vector2f(m_Player.getPosition().x, m_Player.getPosition().y);
+    (*m_Aim)[0].color = sf::Color(0, 255, 0, 128);
+    (*m_Aim)[1].position = sf::Vector2f(m_Player.getPosition().x + 1024.f*m_Player.getDirection().x, m_Player.getPosition().y + 1024.f*m_Player.getDirection().y);
+    (*m_Aim)[1].color = sf::Color(255, 0, 0, 128);
+    
+
     ////////////////////////////
     m_Sprite.setOrigin(145.f, 120.f);
     m_Sprite.setColor(m_Color);
@@ -72,6 +85,7 @@ void PlayerSpriteLayer::update()
 void PlayerSpriteLayer::render()
 {    
     m_Window.draw(m_Sprite);
+    m_Window.draw(*m_Aim);
     //Debug
     //m_Window.draw(m_CollidingArea);
 }

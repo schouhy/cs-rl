@@ -6,7 +6,7 @@ VisualizationStack::VisualizationStack(sf::RenderWindow& window, const Environme
     : LayerStack(window), m_Environment(env)
 {
     initTextures();
-    initSprites();
+    initLayers();
 }
 
 
@@ -30,7 +30,7 @@ void VisualizationStack::initTextures()
     loadTexturesFromFolder(3, "cs_rl/sprites/player/rifle/shoot/", "Shoot", m_PlayerTextures);
 }
 
-void VisualizationStack::initSprites()
+void VisualizationStack::initLayers()
 {
     // Background
     m_Layers.push_back(new MapLayer(m_Window, m_BackgroundTexture));

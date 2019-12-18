@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include "Entity.h"
-#include "Weapon.h"
+#include "env/Weapon.h"
 
 
 #define BIT(x) (1 << x)

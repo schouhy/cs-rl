@@ -1,7 +1,7 @@
 #ifndef PLAYERANIMATION_H
 #define PLAYERANIMATION_H
 
-#include "env/Player.h"
+#include "env/entities/Player.h"
 #include "Layer.h"
 
 using textures_map = std::map<std::string, std::vector<sf::Texture*>>;
@@ -22,7 +22,7 @@ private:
 
     //Debug
     sf::CircleShape m_CollidingArea;
-    
+    sf::VertexArray* m_Aim;    
     // Functions
     void checkReset();
     void transform();
@@ -32,7 +32,7 @@ public:
     // Constructor / Destructor
     PlayerSpriteLayer(sf::RenderWindow& window, const Player& player, textures_map& textures);
     PlayerSpriteLayer(sf::RenderWindow& window, const Player& player, textures_map& textures, sf::Color color);
-    ~PlayerSpriteLayer() = default;
+    ~PlayerSpriteLayer();
 
     // Functions
     void update() override;

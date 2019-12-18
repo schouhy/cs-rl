@@ -1,7 +1,7 @@
 #ifndef ENVIRONMENT_H
 #define ENVIRONMENT_H
 
-#include "Player.h"
+#include "entities/Player.h"
 
 class Environment
 {
@@ -10,7 +10,6 @@ private:
 
     // Players
     std::vector<Player*> m_Players;
-
     // Walls
     std::vector<Segment*> m_Walls;
 

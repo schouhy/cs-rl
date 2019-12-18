@@ -1,7 +1,7 @@
 #ifndef LAYERSTACK_H
 #define LAYERSTACK_H
 
-#include "env/Entity.h"
+#include "env/entities/Entity.h"
 #include "Layer.h"
 
 class LayerStack : public Layer

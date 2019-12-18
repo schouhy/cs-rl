@@ -15,7 +15,7 @@ private:
     sf::Texture m_BackgroundTexture;
 
     // Initializers
-    void initSprites();
+    void initLayers();
     void initTextures();
 
     // Functions

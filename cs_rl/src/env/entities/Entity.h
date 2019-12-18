@@ -1,7 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "ShapeManager.h"
+#include "env/shapes/ShapeManager.h"
 
 class Entity
 {
