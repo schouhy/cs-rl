@@ -3,7 +3,7 @@
 //Constructor / Destructor
 
 Player::Player(float x, float y) 
-    : Entity(x, y), m_lookDirection({1.f, 0.f}), m_MovementState(0)
+    : Entity(x, y), m_lookDirection({1.f, 0.f}), m_MovementState(0), m_Health(100.f)
 {
     initShape();
 }

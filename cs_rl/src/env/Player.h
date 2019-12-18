@@ -29,6 +29,7 @@ friend class Environment;
 private:
     Vec2 m_lookDirection;
     int m_MovementState;
+    float m_Health;
  
     // Initializers
     void initShape();

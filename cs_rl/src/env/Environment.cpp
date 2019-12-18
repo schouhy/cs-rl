@@ -166,31 +166,44 @@ void Environment::collide()
 }
 
 
-void Environment::shoot(const std::vector<ActionInput*>& inputs)
+void Environment::combat(const std::vector<ActionInput*>& inputs)
 {
-    // Player 0 Shoots
-    ActionInput* input = inputs.at(0);
-    Player* player = m_Players.at(0);
-    Player* other_player = m_Players.at(1);
-
-    if (input->pos_action & Action::Shoot)
+    for (std::size_t i=0; i<m_Players.size(); ++i)
     {
-        // TO-DO: Mejorar esto, arrancar con mi_wall_distance=1000000 está feo.
-        float min_wall_distance = 1000000.f;
-        Ray shot(player->getPosition(), player->getDirection());
-        for (auto wall : m_Walls)
-        {
-            float new_distance = shot.hits(*wall);
-            if(new_distance > 0.f && new_distance < min_wall_distance)
-                min_wall_distance = new_distance;
-        }
-        //std::cout << min_wall_distance << std::endl;
-        float distance_to_other_player = shot.hits(*other_player->getShape());
-        if ((distance_to_other_player >= 0.f) && (distance_to_other_player < min_wall_distance))
-            std::cout << "HIT" << std::endl;
-        else
-            std::cout << "MISS" << std::endl;
+        if (inputs[i]->pos_action & Action::Shoot /* && m_Players[i]->isWeaponReady()*/)
+            fire(m_Players[i]);
+        //m_Players[i]->updateWeapon();
     }
+
+}
+
+void Environment::fire(Player* player)
+{
+    Ray shot(player->getPosition(), player->getDirection());
+    
+    // Walls
+    // TO-DO: Mejorar esto, arrancar con mi_wall_distance=1e8f está feo (?).
+    float min_wall_distance = 1e8f;
+    for (auto wall : m_Walls)
+    {
+        float new_distance = shot.hits(*wall);
+        if (new_distance > 0.f && new_distance < min_wall_distance)
+            min_wall_distance = new_distance;
+    }
+
+    // Other players
+    for (auto other_player : m_Players)
+    {
+        if(player != other_player)
+        {
+            float distance_to_other_player = shot.hits(*other_player->getShape());
+            if ((distance_to_other_player >= 0.f) && (distance_to_other_player < min_wall_distance))
+                std::cout << "HIT" << std::endl;
+            else
+                std::cout << "MISS" << std::endl;
+        }
+    }
+   
 }
 
 
@@ -198,7 +211,7 @@ void Environment::step(const std::vector<ActionInput*>& inputs)
 {
     move(inputs);
     collide();
-    shoot(inputs);
+    combat(inputs);
 }
 
 const bool Environment::isDone() const

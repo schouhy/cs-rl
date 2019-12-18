@@ -110,8 +110,10 @@ const float Segment::distanceToSegment(const Segment& segment) const
 
 const float Segment::isHittedBy(const Ray& ray) const
 {
-    float dist_d = determinant(m_Source - ray.getSource(), m_Direction) / (determinant(ray.getDirection(), m_Direction));
-    float dist_s = determinant(ray.getSource() - m_Source, ray.getDirection()) / (determinant(m_Direction, ray.getDirection()));
+    // Cramer's rule to solve dist_d*ray_Direction - dist_s*m_Direction = m_Source - ray_Source
+    float dist_d = determinant(m_Direction, m_Source - ray.getSource()) / (determinant(m_Direction, ray.getDirection()));
+    float dist_s = -determinant(m_Source - ray.getSource(), ray.getDirection()) / (determinant(m_Direction, ray.getDirection()));
+
     if(dist_s >= 0.f && dist_s <= m_Length && dist_d >= 0.f)
         return dist_d;
     else
