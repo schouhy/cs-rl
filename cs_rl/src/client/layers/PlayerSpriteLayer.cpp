@@ -43,7 +43,7 @@ void PlayerSpriteLayer::transform()
 
     (*m_Aim)[0].position = sf::Vector2f(m_Player.getPosition().x, m_Player.getPosition().y);
     (*m_Aim)[0].color = sf::Color(0, 255, 0, 128);
-    (*m_Aim)[1].position = sf::Vector2f(m_Player.getPosition().x + 1024.f*m_Player.getDirection().x, m_Player.getPosition().y + 1024.f*m_Player.getDirection().y);
+    (*m_Aim)[1].position = sf::Vector2f(m_Player.getPosition().x + m_Player.getDistanceAhead()*m_Player.getDirection().x, m_Player.getPosition().y + m_Player.getDistanceAhead()*m_Player.getDirection().y);
     (*m_Aim)[1].color = sf::Color(255, 0, 0, 128);
     
 

@@ -31,7 +31,7 @@ friend class Environment;
 private:
     Vec2 m_lookDirection;
     int m_MovementState;
-    float m_Health;
+    float m_DistanceAhead;
     Weapon* m_Weapon;
 
     // Initializers
@@ -49,6 +49,7 @@ public:
     const Vec2 getPosition() const;
     const Vec2 getDirection() const;
     const int getMovementState() const;
+    const float getDistanceAhead() const;
 };
 
 #endif // PLAYER_H

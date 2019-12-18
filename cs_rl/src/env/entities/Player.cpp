@@ -3,7 +3,7 @@
 //Constructor / Destructor
 
 Player::Player(float x, float y) 
-    : Entity(x, y), m_lookDirection({1.f, 0.f}), m_MovementState(0), m_Health(100.f)
+    : Entity(x, y), m_lookDirection({1.f, 0.f}), m_MovementState(0), m_DistanceAhead(0.f)
 {
     initShape();
     m_Weapon = new Weapon(75.f, 10);
@@ -32,15 +32,15 @@ void Player::move(ActionInput *input)
     if (m_MovementState & StrafeLeft) 
     {
         //m_Position += Vec2({m_lookDirection.y, -m_lookDirection.x})* 0.5f * walking_factor;
-        m_Position.x += m_lookDirection.y * 0.5f * walking_factor;
-        m_Position.y += -m_lookDirection.x * 0.5f * walking_factor;
+        m_Position.x += m_lookDirection.y * 0.75f * walking_factor;
+        m_Position.y += -m_lookDirection.x * 0.75f * walking_factor;
     }
 
     if (m_MovementState & StrafeRight)
     {
         //m_Position += Vec2({-m_lookDirection.y, m_lookDirection.x})* 0.5f * walking_factor;
-        m_Position.x += -m_lookDirection.y * 0.5f * walking_factor;
-        m_Position.y += m_lookDirection.x * 0.5f * walking_factor;
+        m_Position.x += -m_lookDirection.y * 0.75f * walking_factor;
+        m_Position.y += m_lookDirection.x * 0.75f * walking_factor;
     }
 
     if (m_MovementState & Forward)
@@ -80,4 +80,8 @@ const int Player::getMovementState() const
 {
     return m_MovementState;
 }
- 
+
+const float Player::getDistanceAhead() const
+{
+    return m_DistanceAhead;
+}

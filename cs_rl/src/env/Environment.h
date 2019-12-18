@@ -20,6 +20,7 @@ private:
     // Functions
     void move(const std::vector<ActionInput*>& inputs);
     void collide();
+    void updatePlayerDistanceAhead();
     void combat(const std::vector<ActionInput*>& inputs);
     void fire(Player* player);
 public:

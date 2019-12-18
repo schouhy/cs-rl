@@ -166,6 +166,28 @@ void Environment::collide()
     }
 }
 
+void Environment::updatePlayerDistanceAhead()
+{
+    for(auto player: m_Players)
+    {
+        Ray ray(player->getPosition(), player->getDirection());
+        // Walls
+        // TO-DO: Mejorar esto, arrancar con mi_wall_distance=1e8f está feo (?).
+        float min_wall_distance = 1e8f;
+        for(auto wall : m_Walls)
+        {
+            
+            for (auto wall : m_Walls)
+            {
+                float new_distance = ray.distanceToShape(*wall);
+                if (new_distance > 0.f && new_distance < min_wall_distance)
+                    min_wall_distance = new_distance;
+            }        
+        }
+        player->m_DistanceAhead = min_wall_distance;
+    }
+}
+
 
 void Environment::combat(const std::vector<ActionInput*>& inputs)
 {
@@ -184,26 +206,17 @@ void Environment::fire(Player* player)
     player->m_Weapon->fire();
     Ray shot(player->getPosition(), player->getDirection());
     
-    // Walls
-    // TO-DO: Mejorar esto, arrancar con mi_wall_distance=1e8f está feo (?).
-    float min_wall_distance = 1e8f;
-    for (auto wall : m_Walls)
-    {
-        float new_distance = shot.distanceToShape(*wall);
-        if (new_distance > 0.f && new_distance < min_wall_distance)
-            min_wall_distance = new_distance;
-    }
-    std::cout << min_wall_distance << std::endl;
+    std::cout << player->m_DistanceAhead << std::endl;
     // Other players
     for (auto other_player : m_Players)
     {
         if(player != other_player)
         {
             float distance_to_other_player = shot.distanceToShape(*other_player->getShape());
-            /*if ((distance_to_other_player >= 0.f) && (distance_to_other_player < min_wall_distance))
+            if ((distance_to_other_player >= 0.f) && (distance_to_other_player < player->getDistanceAhead()))
                 std::cout << "HIT" << std::endl;
             else
-                std::cout << "MISS" << std::endl;*/
+                std::cout << "MISS" << std::endl;
         }
     }
     std::cout << "###" << std::endl;
@@ -215,6 +228,7 @@ void Environment::step(const std::vector<ActionInput*>& inputs)
 {
     move(inputs);
     collide();
+    updatePlayerDistanceAhead();
     combat(inputs);
 }
 
