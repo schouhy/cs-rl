@@ -1,8 +1,8 @@
 #include "Weapon.h"
 
 // Weapon
-Weapon::Weapon(int rate_of_fire)
-    : m_RateOfFire(rate_of_fire), m_StepsToReady(0)
+Weapon::Weapon(float damage, int rate_of_fire)
+    : m_Damage(damage), m_RateOfFire(rate_of_fire), m_StepsToReady(0)
 {
 }
 
@@ -17,23 +17,9 @@ void Weapon::update()
         m_StepsToReady--;
 }
 
-void Weapon::fire()
+float Weapon::fire()
 {
     m_StepsToReady = m_RateOfFire;
+    return m_Damage;
 }
 
-// Rifle
-
-Rifle::Rifle()
-    : Weapon(30)
-{
-}
-
-Rifle::~Rifle()
-{
-}
-
-const float Rifle::getDamage() const
-{
-    return 100.f;
-}

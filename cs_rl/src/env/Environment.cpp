@@ -24,6 +24,7 @@ void Environment::initPlayers()
 {
     m_Players.push_back(new Player(400.f, 300.f));
     m_Players.push_back(new Player(500.f, 300.f));
+    m_Players.push_back(new Player(600.f, 300.f));
 }
 
 void Environment::initWalls()
@@ -170,17 +171,17 @@ void Environment::combat(const std::vector<ActionInput*>& inputs)
 {
     for (std::size_t i=0; i<m_Players.size(); ++i)
     {
-        if (inputs[i]->pos_action & Action::Shoot && m_Players[i]->m_Weapon.isReady())
+        if (inputs[i]->pos_action & Action::Shoot && m_Players[i]->m_Weapon->isReady())
             fire(m_Players[i]);
         else
-            m_Players[i]->m_Weapon.update();
+            m_Players[i]->m_Weapon->update();
     }
 
 }
 
 void Environment::fire(Player* player)
 {
-    player->m_Weapon.fire();
+    player->m_Weapon->fire();
     Ray shot(player->getPosition(), player->getDirection());
     
     // Walls
@@ -205,6 +206,7 @@ void Environment::fire(Player* player)
                 std::cout << "MISS" << std::endl;
         }
     }
+    std::cout << "###" << std::endl;
    
 }
 

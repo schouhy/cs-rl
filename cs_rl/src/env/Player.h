@@ -32,8 +32,8 @@ private:
     Vec2 m_lookDirection;
     int m_MovementState;
     float m_Health;
-    Rifle m_Weapon;
-    
+    Weapon* m_Weapon;
+
     // Initializers
     void initShape();
 

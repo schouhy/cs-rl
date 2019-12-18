@@ -36,9 +36,9 @@ void VisualizationStack::initSprites()
     m_Layers.push_back(new MapLayer(m_Window, m_BackgroundTexture));
 
     // Players
-    std::vector<sf::Color> colors = {sf::Color(255, 185, 185), sf::Color(128, 255, 128)};
+    std::vector<sf::Color> colors = {sf::Color(255, 185, 185), sf::Color(128, 255, 128), sf::Color(128, 128, 255)};
     for (std::size_t i = 0; i < m_Environment.getPlayers().size(); ++i)
-        m_Layers.push_back(new PlayerSpriteLayer(m_Window, *m_Environment.getPlayers()[i], m_PlayerTextures, colors[i]));
+        m_Layers.push_back(new PlayerSpriteLayer(m_Window, *m_Environment.getPlayers()[i], m_PlayerTextures, colors[i % 3]));
 }
 
 // Functions

@@ -6,11 +6,13 @@ Player::Player(float x, float y)
     : Entity(x, y), m_lookDirection({1.f, 0.f}), m_MovementState(0), m_Health(100.f)
 {
     initShape();
+    m_Weapon = new Weapon(75.f, 60);
 }
 
 Player::~Player()
 {
     delete m_Shape;
+    delete m_Weapon;
 }
 
 // Functions
