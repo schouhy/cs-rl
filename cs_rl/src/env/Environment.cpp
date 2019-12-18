@@ -189,21 +189,21 @@ void Environment::fire(Player* player)
     float min_wall_distance = 1e8f;
     for (auto wall : m_Walls)
     {
-        float new_distance = shot.hits(*wall);
+        float new_distance = shot.distanceToShape(*wall);
         if (new_distance > 0.f && new_distance < min_wall_distance)
             min_wall_distance = new_distance;
     }
-
+    std::cout << min_wall_distance << std::endl;
     // Other players
     for (auto other_player : m_Players)
     {
         if(player != other_player)
         {
-            float distance_to_other_player = shot.hits(*other_player->getShape());
-            if ((distance_to_other_player >= 0.f) && (distance_to_other_player < min_wall_distance))
+            float distance_to_other_player = shot.distanceToShape(*other_player->getShape());
+            /*if ((distance_to_other_player >= 0.f) && (distance_to_other_player < min_wall_distance))
                 std::cout << "HIT" << std::endl;
             else
-                std::cout << "MISS" << std::endl;
+                std::cout << "MISS" << std::endl;*/
         }
     }
     std::cout << "###" << std::endl;
