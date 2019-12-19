@@ -168,6 +168,10 @@ void Environment::collide()
 
 void Environment::updatePlayerDistanceAhead()
 {
+    // Aca tengo que tener dos matrices M, N de 2 x n_Walls. Una para m_Source's y otra para m_Target's, en columnas
+    // y otra A para las normales de los Rays de los jugadores, en columnas. Así puedo calcular de una A^tN Hadd_prod A^tM
+    // que es de tamaño n_jugadores x n_walls y dice para cada jugador qué paredes se chocan con su Ray.
+
     for(auto player: m_Players)
     {
         Ray ray(player->getPosition(), player->getDirection());

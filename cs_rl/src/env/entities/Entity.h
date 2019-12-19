@@ -15,7 +15,7 @@ public:
     virtual ~Entity() = default;
 
     // Accesors
-    virtual const glm::vec2 getPosition() const = 0;
+    virtual const Vec2 getPosition() const = 0;
     const Shape* getShape() const;
 };
 

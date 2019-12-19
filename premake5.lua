@@ -10,6 +10,7 @@ workspace "cs_rl"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["glm"] = "cs_rl/vendor/glm"
+IncludeDir["Eigen"] = "cs_rl/vendor/Eigen"
 
 project "cs_rl"
     location "cs_rl"
@@ -26,13 +27,15 @@ project "cs_rl"
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp",
         "%{prj.name}/vendor/glm/glm/**.hpp",
-		"%{prj.name}/vendor/glm/glm/**.inl",
+        "%{prj.name}/vendor/glm/glm/**.inl",
+        "%{prj.name}/vendor/glm/Eigen/**.h",
     }
 
     includedirs
     {
         "%{prj.name}/src",
         "%{IncludeDir.glm}",
+        "%{IncludeDir.Eigen}",
     }
 
 	links

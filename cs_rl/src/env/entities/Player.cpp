@@ -24,7 +24,7 @@ void Player::move(ActionInput *input)
     m_MovementState = input->pos_action;
 
     // m_Direction
-    m_lookDirection = glm::rotate(m_lookDirection, input->angle_action);
+    m_lookDirection = rotate(m_lookDirection, input->angle_action);
 
     // m_Position
     float walking_factor = (input->pos_action & Walk)? 0.45 : 1.15;
@@ -71,7 +71,7 @@ const Vec2 Player::getPosition() const
     return m_Position;
 }
 
-const glm::vec2 Player::getDirection() const
+const Vec2 Player::getDirection() const
 {
     return m_lookDirection;
 }

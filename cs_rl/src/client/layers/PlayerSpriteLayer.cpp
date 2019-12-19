@@ -52,7 +52,7 @@ void PlayerSpriteLayer::transform()
     m_Sprite.setColor(m_Color);
     m_Sprite.setPosition(m_Player.getPosition().x, m_Player.getPosition().y);
     m_Sprite.setScale(sf::Vector2f(0.08f, 0.08f));
-    m_Sprite.setRotation(glm::orientedAngle(glm::vec2(1.f,0.f), glm::normalize(m_Player.getDirection()))*180.f/3.14159f);
+    m_Sprite.setRotation(orientedAngle(Vec2(1.f,0.f), normalize(m_Player.getDirection()))*180.f/3.14159f);
 }
 
 void PlayerSpriteLayer::playNextFrame(std::string key, int speed_factor)
