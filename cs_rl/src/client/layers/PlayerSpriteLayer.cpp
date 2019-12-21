@@ -34,24 +34,31 @@ void PlayerSpriteLayer::checkReset()
 
 void PlayerSpriteLayer::transform()
 {
+    sf::Vector2u scale = m_Window.getSize();
+    Vec2 pos = m_Player.getPosition();
+    Vec2 dir = m_Player.getDirection();
+    float dist_ahead = m_Player.getDistanceAhead();
+    
     ////////   Debug ///////////
     m_CollidingArea.setFillColor(sf::Color::Red);
     m_CollidingArea.setPointCount(30);
     m_CollidingArea.setRadius(5.f);
     m_CollidingArea.setOrigin(5.f, 5.f);
-    m_CollidingArea.setPosition(m_Player.getPosition().x, m_Player.getPosition().y);
+    m_CollidingArea.setPosition(pos.x*scale.x, pos.y*scale.y);
+    ////////////////////////////
 
-    (*m_Aim)[0].position = sf::Vector2f(m_Player.getPosition().x, m_Player.getPosition().y);
+    // Aim
+    (*m_Aim)[0].position = sf::Vector2f(pos.x*scale.x, pos.y*scale.y);
     (*m_Aim)[0].color = sf::Color(0, 255, 0, 128);
-    (*m_Aim)[1].position = sf::Vector2f(m_Player.getPosition().x + m_Player.getDistanceAhead()*m_Player.getDirection().x, m_Player.getPosition().y + m_Player.getDistanceAhead()*m_Player.getDirection().y);
+    (*m_Aim)[1].position = sf::Vector2f((pos.x + dist_ahead*dir.x)*scale.x, (pos.y + dist_ahead*dir.y)*scale.y);
     (*m_Aim)[1].color = sf::Color(255, 0, 0, 128);
     
-
-    ////////////////////////////
+    // Player
     m_Sprite.setOrigin(145.f, 120.f);
     m_Sprite.setColor(m_Color);
-    m_Sprite.setPosition(m_Player.getPosition().x, m_Player.getPosition().y);
-    m_Sprite.setScale(sf::Vector2f(0.08f, 0.08f));
+    m_Sprite.setPosition(pos.x*scale.x, pos.y*scale.y);
+    
+    m_Sprite.setScale(sf::Vector2f(1e-4f*scale.x, 1e-4f*scale.x));
     m_Sprite.setRotation(orientedAngle(Vec2(1.f,0.f), normalize(m_Player.getDirection()))*180.f/3.14159f);
 }
 

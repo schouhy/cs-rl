@@ -1,5 +1,8 @@
 #include "Player.h"
 
+#define SPEED 1e-3f
+
+
 //Constructor / Destructor
 
 Player::Player(float x, float y) 
@@ -32,22 +35,22 @@ void Player::move(ActionInput *input)
     if (m_MovementState & StrafeLeft) 
     {
         //m_Position += Vec2({m_lookDirection.y, -m_lookDirection.x})* 0.5f * walking_factor;
-        m_Position.x += m_lookDirection.y * 0.75f * walking_factor;
-        m_Position.y += -m_lookDirection.x * 0.75f * walking_factor;
+        m_Position.x += m_lookDirection.y * 0.75f * walking_factor * SPEED;
+        m_Position.y += -m_lookDirection.x * 0.75f * walking_factor * SPEED;
     }
 
     if (m_MovementState & StrafeRight)
     {
         //m_Position += Vec2({-m_lookDirection.y, m_lookDirection.x})* 0.5f * walking_factor;
-        m_Position.x += -m_lookDirection.y * 0.75f * walking_factor;
-        m_Position.y += m_lookDirection.x * 0.75f * walking_factor;
+        m_Position.x += -m_lookDirection.y * 0.75f * walking_factor * SPEED;
+        m_Position.y += m_lookDirection.x * 0.75f * walking_factor * SPEED;
     }
 
     if (m_MovementState & Forward)
-        m_Position += m_lookDirection * walking_factor;
+        m_Position += m_lookDirection * walking_factor * SPEED;
 
     if (m_MovementState & Backward)
-        m_Position -= m_lookDirection * 0.5f * walking_factor;
+        m_Position -= m_lookDirection * 0.5f * walking_factor * SPEED;
 }
 
 void Player::move(Vec2& delta)
@@ -61,7 +64,7 @@ void Player::move(Vec2& delta)
 
 void Player::initShape()
 {
-    m_Shape = new Circle(m_Position, 6.f);
+    m_Shape = new Circle(m_Position, 6e-3f);
 }
 
 // Accessors

@@ -9,6 +9,7 @@ private:
     sf::Texture& m_Texture;
     sf::Sprite m_Sprite;
 
+
 public:
     MapLayer(sf::RenderWindow& window, sf::Texture& texture);
     ~MapLayer() = default;
