@@ -2,6 +2,8 @@
 #define ENVIRONMENT_H
 
 #include "entities/Player.h"
+#include "env/shapes/ShapesManager.h"
+
 
 class Environment
 {
@@ -12,6 +14,7 @@ private:
     std::vector<Player*> m_Players;
     // Walls
     std::vector<Segment*> m_Walls;
+    ShapesManager *m_ShapesManager;
 
     // Initializers
     void initPlayers();

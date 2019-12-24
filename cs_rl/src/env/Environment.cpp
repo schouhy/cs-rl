@@ -6,6 +6,16 @@ Environment::Environment()
     m_Done = false;
     initPlayers();
     initWalls();
+    int n = 16;
+    
+    m_ShapesManager = new ShapesManager(n, n, m_Walls);
+    //for(int i=0; i<n; ++i)
+    //    for(int j=0; j<n; ++j)
+    //    {
+    //        if ((*m_ShapesManager).m_Walls[{i, j}].size() > 17)
+    //            std::cout << i << " " << j << std::endl;
+    //    }
+
 }
 
 Environment::~Environment()
@@ -16,6 +26,8 @@ Environment::~Environment()
 
     for (auto wall : m_Walls)
         delete wall;
+    
+    delete m_ShapesManager;
 }
 
 // Initializers
@@ -107,7 +119,6 @@ void Environment::initWalls()
     {0.447266, 0.911458},
     {0.402344, 0.91276},
     {0.402344, 0.78776},
-    {0.357422, 0.78776}
     });
 
     walls.push_back(corners);

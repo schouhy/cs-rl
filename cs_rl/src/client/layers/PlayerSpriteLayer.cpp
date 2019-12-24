@@ -42,8 +42,8 @@ void PlayerSpriteLayer::transform()
     ////////   Debug ///////////
     m_CollidingArea.setFillColor(sf::Color::Red);
     m_CollidingArea.setPointCount(30);
-    m_CollidingArea.setRadius(5.f);
-    m_CollidingArea.setOrigin(5.f, 5.f);
+    m_CollidingArea.setRadius(6e-3f*scale.x);
+    m_CollidingArea.setOrigin(6e-3f*scale.x, 6e-3f*scale.x);
     m_CollidingArea.setPosition(pos.x*scale.x, pos.y*scale.y);
     ////////////////////////////
 
@@ -58,7 +58,7 @@ void PlayerSpriteLayer::transform()
     m_Sprite.setColor(m_Color);
     m_Sprite.setPosition(pos.x*scale.x, pos.y*scale.y);
     
-    m_Sprite.setScale(sf::Vector2f(1e-4f*scale.x, 1e-4f*scale.x));
+    m_Sprite.setScale(sf::Vector2f(8e-5f*scale.x, 8e-5f*scale.x));
     m_Sprite.setRotation(orientedAngle(Vec2(1.f,0.f), normalize(m_Player.getDirection()))*180.f/3.14159f);
 }
 
@@ -94,5 +94,5 @@ void PlayerSpriteLayer::render()
     m_Window.draw(m_Sprite);
     m_Window.draw(*m_Aim);
     //Debug
-    //m_Window.draw(m_CollidingArea);
+   // m_Window.draw(m_CollidingArea);
 }

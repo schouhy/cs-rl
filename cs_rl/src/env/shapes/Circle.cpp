@@ -20,12 +20,6 @@ const float Circle::getRadius() const
     return m_Radius;
 }
 
-/*
-void Circle::setCenter(Vec2 new_center)
-{
-    m_Center = new_center;
-}*/
-
 const float Circle::distanceTo(const Shape& other_shape) const
 {
     return other_shape.distanceToCircle(*this);
@@ -40,6 +34,7 @@ const float Circle::distanceToSegment(const Segment& segment) const
 {
     return segment.distanceToCircle(*this);
 }
+
 
 const float Circle::distanceToRaySource(const Ray& ray) const
 {
