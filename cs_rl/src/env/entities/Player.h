@@ -29,6 +29,7 @@ class Player : public Entity
 {
 friend class Environment;
 private:
+    Vec2 m_Position;
     Vec2 m_lookDirection;
     int m_MovementState;
     float m_DistanceAhead;
@@ -44,6 +45,9 @@ public:
     // Constructor / Destructor
     Player(float x, float y);
     ~Player();
+
+    // Functions
+    float distanceTo(const Entity& other_entity) override;
 
     // Accessors
     const Vec2 getPosition() const;

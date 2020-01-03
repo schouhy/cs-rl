@@ -20,11 +20,6 @@ const float Circle::getRadius() const
     return m_Radius;
 }
 
-const float Circle::distanceTo(const Shape& other_shape) const
-{
-    return other_shape.distanceToCircle(*this);
-}
-
 const float Circle::distanceToCircle(const Circle& circle) const
 {
     return distance(getCenter(), circle.getCenter()) - getRadius() - circle.getRadius();

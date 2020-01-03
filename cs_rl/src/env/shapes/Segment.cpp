@@ -15,11 +15,6 @@ Segment::~Segment()
 }
 
 
-const float Segment::distanceTo(const Shape& other_shape) const
-{
-    return other_shape.distanceToSegment(*this);
-}
-
 float Segment::distanceToPoint(const Vec2& point) const
 {
     float norm_dir_coeff = dot(point - m_Source, m_Normal);

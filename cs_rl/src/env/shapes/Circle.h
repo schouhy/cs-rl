@@ -17,7 +17,6 @@ public:
     ~Circle();
     const Vec2 getCenter() const;
     const float getRadius() const;
-    const float distanceTo(const Shape& other_shape) const override;
     const float distanceToCircle(const Circle& circle) const override;
     const float distanceToSegment(const Segment& segment) const override;
     const float distanceToRaySource(const Ray& ray) const override; // borrar

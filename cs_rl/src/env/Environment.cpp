@@ -8,7 +8,7 @@ Environment::Environment()
     initWalls();
     int n = 16;
     
-    m_ShapesManager = new ShapesManager(n, n, m_Walls);
+    //m_ShapesManager = new ShapesManager(n, n, m_Walls);
     //for(int i=0; i<n; ++i)
     //    for(int j=0; j<n; ++j)
     //    {
@@ -27,7 +27,7 @@ Environment::~Environment()
     for (auto wall : m_Walls)
         delete wall;
     
-    delete m_ShapesManager;
+    //delete m_ShapesManager;
 }
 
 // Initializers
@@ -127,7 +127,7 @@ void Environment::initWalls()
     walls.push_back({{0.575195, 0.356771}, {0.585938, 0.324219}, {0.560547, 0.308594}, {0.550781, 0.341146}});
     for (auto wall : walls)
         for (std::size_t i=0; i<wall.size(); ++i)
-            m_Walls.push_back(new Segment(wall[i], wall[(i+1)%wall.size()]));
+            m_Walls.push_back(new Wall(wall[i], wall[(i+1)%wall.size()]));
 }
 // Accesors
 
@@ -153,7 +153,7 @@ void Environment::collide()
         // Collision with other players
         for(std::size_t j=i+1; j<m_Players.size(); ++j)
         {
-            const float distance = m_Players[i]->getShape()->distanceTo(*m_Players[j]->getShape());
+            const float distance = m_Players[i]->distanceTo(*m_Players[j]);
             if (distance < 0.)
             {
                 Vec2 delta = normalize(m_Players[j]->getPosition() - m_Players[i]->getPosition());
@@ -169,10 +169,10 @@ void Environment::collide()
         // Collision with walls
         for(std::size_t j=0; j<m_Walls.size(); ++j)
         {
-            float wall_distance = m_Players[i]->getShape()->distanceTo(*m_Walls[j]);
+            float wall_distance = m_Players[i]->distanceTo(*m_Walls[j]);
             if (wall_distance < 0.f)
             {
-                Vec2 delta = m_Walls[j]->m_Normal;
+                Vec2 delta = m_Walls[j]->getNormal();
                 // TO-DO: Ver por qué hay que hacer esto y no se puede 
                 // directamente hacer `Player[i]->move(-1.f*wall_distance* m_Walls[j]->m_Normal);`
                 delta = -1.f*wall_distance*delta; 
@@ -192,7 +192,7 @@ void Environment::updatePlayerDistanceAhead()
         float min_wall_distance = 1e3f;
         for(auto wall : m_Walls)
         {
-            float new_distance = ray.distanceToShape(*wall);
+            float new_distance = ray.distanceToShape(*wall->getShape());
             if (new_distance > 0.f && new_distance < min_wall_distance)
                 min_wall_distance = new_distance;        
         }

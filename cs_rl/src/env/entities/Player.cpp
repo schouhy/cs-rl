@@ -6,7 +6,7 @@
 //Constructor / Destructor
 
 Player::Player(float x, float y) 
-    : Entity(x, y), m_lookDirection({1.f, 0.f}), m_MovementState(0), m_DistanceAhead(0.f)
+    : m_Position(x, y), m_lookDirection({1.f, 0.f}), m_MovementState(0), m_DistanceAhead(0.f)
 {
     initShape();
     m_Weapon = new Weapon(75.f, 10);
@@ -14,7 +14,7 @@ Player::Player(float x, float y)
 
 Player::~Player()
 {
-    delete m_Shape;
+    //delete m_Shape;
     delete m_Weapon;
 }
 
@@ -59,6 +59,10 @@ void Player::move(Vec2& delta)
 }
 
 
+float Player::distanceTo(const Entity& other_entity)
+{
+    return other_entity.getShape()->distanceToCircle(*static_cast<Circle*>(m_Shape));
+}
 
 // Initializers
 
